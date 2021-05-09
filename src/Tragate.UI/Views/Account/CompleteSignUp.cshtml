@@ -1,0 +1,64 @@
+@model Tragate.UI.Models.User.CompleteSignUpViewModel
+@{ 
+    ViewData["Title"] = "Register and Join Free";
+    ViewData["Class"] = "SingUp";
+    Layout = "~/Views/NewShared/AccountLayout.cshtml"; 
+}
+<div class="u-full-width ForgotPage">
+    <div class="container">
+        <div class="twelve columns t-center">
+            <h1>Sign Up and Join Free Now!</h1>
+            <p>Complete your sign up process to get instant access</p>
+            <form class="ajax tragate" method="post" action="/Account/complete-sign-up" validate>
+                <input type="hidden" asp-for="Token"  value="@Model.Token" />
+                <div class="form-group">
+                    <label><i class="fa fa-envelope"></i> Email</label>
+                    <input type="email" asp-for="Email" value="@Model.Email" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa fa-map-marker"></i> Location</label>
+                    <input type="text" asp-for="Location" value="@Model.Location" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa fa-user"></i> Your Full Name</label>
+                    <input type="text" asp-for="FullName" placeholder="Your Full Name" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fa fa-lock"></i> Password</label>
+                    <input id="Password" type="password" asp-for="Password" placeholder="Password" minlength="6" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fa fa-lock"></i> Confirm Password</label>
+                    <input type="password" asp-for="PasswordMatch" placeholder="Confirm password" minlength="6" data-rule-equalTo="#Password" required>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="mcheckbox">
+                            <input type="checkbox" name="UserTermCheckBox" id="UserTermCheckBox" value="false" checked required>
+                            <label for="UserTermCheckBox"></label>
+                        </div>
+                        <label for="UserTermCheckBox">
+                            I accept TraGate
+                            <span class="ShowTrageteModal" data-url="/content/user-terms/json" data-title="User Terms" style="text-decoration:underline;">
+                                User Terms
+                            </span>
+                            and
+                            <span class="ShowTrageteModal" data-url="/content/privacy-policy/json" data-title="User Terms" style="text-decoration:underline;">
+                                Privacy Policy
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn torquoise submit">Complete Sign Up</button>
+                </div>
+                <span href="#">
+                    Already have an account ?
+                </span>
+                <a href="/Account/login" class="underline">Go to Login</a>
+            </form>
+        </div>
+    </div>
+</div>

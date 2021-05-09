@@ -1,0 +1,70 @@
+@model Tragate.UI.Models.CompanyAdmin.UserCompanyAdminListViewModel
+@{ ViewData["Title"] = "Company Admins"; Layout = "~/Views/Shared/_CompanyAdminLayout.cshtml"; }
+<div class="type-page hentry">
+    <header class="entry-header">
+        <div class="page-header-caption">
+            <h1 class="entry-title">Admins</h1>
+        </div>
+    </header>
+    <div class="entry-content">
+        <div class="row">
+            <div class="col-md-3">
+                <img alt="" class="wp-post-image" src="~/assets/images/person.png" width="80" />
+            </div>
+            <div class="col-md-9">
+                <form asp-action="Create" id="Create" class="aligncenter tragate ajax" data-reload="true" data-reloadtime="2000">
+                    <input type="hidden" asp-for="@Model.CompanyId" />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="black-label">Admin Email</label>
+                                <input name="Email" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="black-label">Role</label>
+                                <select name="RoleId" class="ajax" data-url="/common/parameter/CompanyAdminRoleId" required></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="black-label">&nbsp;</label>
+                                <button type="button" class="button is-primary full-width">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <table class="shop_table cart wishlist_table">
+            <tbody>
+                @foreach (var item in Model.UserAdminList)
+                {
+                    <tr>
+                        <td>
+                            <img class="wp-post-image" src="@item.ProfileImagePath" width="80" />
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>@item.Email</td>
+                        <td>
+                            @item.Role
+                        </td>
+                        <td>
+                            <button type="button" class="button button alt" onclick="RemoveCompanyAdmin(@item.Id)">
+                                <i class="fa fa-trash"></i> Delete
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <cs-pager cs-paging-pagesize="10" cs-paging-pagenumber="@Model.PageNumber" cs-paging-totalitems="@Model.TotalCount" cs-pagenumber-param="page" , asp-controller="CompanyAdmin" asp-action="Admins"></cs-pager>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/assets/js/app-js/company-admin.js" asp-append-version="true"></script>
+}

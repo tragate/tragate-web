@@ -1,0 +1,48 @@
+<header id="masthead" class="site-header header-v1" style="background-image: none; border: 1px solid silver;">
+    <div class="col-full desktop-only">
+        <div class="row">
+            <div class="site-branding">
+                <a href="@Url.Action("index", "home")" class="custom-logo-link" rel="home">
+                    <img src="~/assets/images/logo.png">
+                </a>
+            </div>
+            <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation" data-nav="flex-menu">
+                <ul id="menu-primary-menu" class="nav yamm">
+                    <li class="menu-item animate-dropdown">
+                        <a asp-action="index" asp-controller="home">Home</a>
+                    </li>
+                    <li class="menu-item animate-dropdown">
+                        <a asp-action="content" asp-controller="home" asp-route-slug="what-is-tragate">What is Tragate?</a>
+                    </li>
+                    <li class="menu-item animate-dropdown">
+                        <a asp-action="content" asp-controller="home" asp-route-slug="buy">Buy</a>
+                    </li>
+                    <li class="menu-item animate-dropdown">
+                        <a asp-action="content" asp-controller="home" asp-route-slug="sell">Sell</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="col-full handheld-only">
+        <div class="handheld-header">
+            <div class="row">
+                <div class="site-branding">
+                    <a href="@Url.Action("index", "home")" class="custom-logo-link" rel="home">
+                        <img src="~/assets/images/logo.png">
+                    </a>
+                </div>
+                <div class="handheld-header-links">
+                    <ul class="columns-3">
+                        <li class="wishlist">
+                            <a href="@Url.Action("index", "home")" class="has-icon">
+                                <i class="fa fa-home"></i>
+                                <span class="count">3</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

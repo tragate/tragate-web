@@ -1,0 +1,66 @@
+@model Tragate.UI.Models.Product.ProductImageViewModel
+@{ ViewData["Title"] = "Product Images"; Layout = "~/Views/Shared/_CompanyAdminLayout.cshtml"; }
+@section Styles{
+    <link href="~/assets/css/custom-css/wizard/style.css" asp-append-version="true" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/assets/js/app-js/product-images.js" asp-append-version="true" defer></script>
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script>
+        if ('@ViewBag.IsEditButtonVisible') {
+            $('#btnEditProduct').show();
+        } else {
+            $('#btnEditProduct').hide();
+        }
+        if ('@ViewBag.IsAlertVisible') {
+            $('#imageAlertInfo').html('You can edit product images here.');
+        } else {
+            $('#imageAlertInfo').html('You can upload product images here.');
+        }
+    </script>
+}
+<div class="type-page hentry" data-mode="@Model.Mode" data-productid="@Model.ProductId" data-uuid="@Model.Uuid" data-id="@Model.Id">
+    <header class="entry-header">
+        <div class="page-header-caption">
+            <h1 class="entry-title" style="text-align:center;">Product Operations</h1>
+        </div>
+    </header>
+    <div class="f1-steps">
+        <div class="f1-progress">
+            <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3" style="width: 100%;"></div>
+        </div>
+        <div class="f1-step activated">
+            <div class="f1-step-icon"><i class="fa fa-ellipsis-h"></i></div>
+            <p>Select Category</p>
+        </div>
+        <div class="f1-step activated">
+            <div class="f1-step-icon"><i class="fa fa-shopping-basket"></i></div>
+            <p>Product Information</p>
+            <a class="button is-primary" id="btnEditProduct" href="/companyadmin/product-edit/@Model.Id/@Model.ProductId">Click to Edit Product Information</a>
+        </div>
+        <div class="f1-step active">
+            <div class="f1-step-icon"><i class="fa fa-image"></i></div>
+            <p>Product Images</p>
+        </div>
+    </div>
+    <br />
+    <div>
+        <div class="alert alert-info">
+            <strong id="imageAlertInfo">
+                You can edit product images here.
+            </strong>
+        </div>
+    </div>
+
+    <div class="type-page hentry" id="imageList">
+
+    </div>
+    <div class="type-page hentry">
+        <form id="addProductForm" class="wpcf7-form">
+            <input name="files" id="files" type="file" multiple="multiple" accept="image/*" />
+        </form>
+        <div class="type-page hentry">
+            <a id="btnComplete" class="btn btn-success" style="display:none; width:100%;" href="/companyadmin/products/@Model.Id">Complete</a>
+        </div>
+    </div>
+</div>

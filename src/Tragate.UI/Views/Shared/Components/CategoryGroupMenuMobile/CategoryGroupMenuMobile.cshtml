@@ -1,0 +1,30 @@
+@model List<Tragate.UI.Models.Category.GroupCategoryViewModel>
+
+@foreach(var root in Model) {
+<li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
+    <a data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">
+        @root.GroupCategoryName <span class="caret"></span></a>
+    <ul role="menu" class=" dropdown-menu">
+        <li class="menu-item menu-item-object-static_block animate-dropdown">
+            <div class="yamm-content">
+                <div class="row yamm-content-row">
+                    <div class="col-sm-12">
+                        <div class="kc-col-container">
+                            <div class="kc_text_block">
+                                <ul>
+                                @foreach(var category in root.CategoryList) {
+                                    <li><a asp-action="products" asp-controller="search" asp-route-category="@category.Slug"><strong>@category.CategoryName</strong></a></li>
+                                    @foreach(var sub in category.SubCategoryList) {
+                                        <li><a asp-action="products" asp-controller="search" asp-route-category="@sub.Slug">@sub.CategoryName</a></li>
+                                    }
+                                }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</li>
+}

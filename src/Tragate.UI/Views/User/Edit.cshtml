@@ -1,0 +1,78 @@
+@model Tragate.UI.Models.User.UserProfileViewModel
+@{
+    ViewData["Title"] = "Edit Your Profile";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@section Scripts{
+    <script src="~/assets/js/app-js/userUpdate.js" asp-append-version="true" defer></script>
+}
+<div class="type-page hentry">
+    <header class="entry-header">
+        <div class="page-header-caption">
+            <h1 class="entry-title">Edit Profile</h1>
+        </div>
+    </header>
+    <div class="entry-content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-form">
+                    <div role="form" class="wpcf7" id="wpcf7-f425-o1" lang="en-US" dir="ltr">
+                        <div class="screen-reader-response"></div>
+
+                        <input type="hidden" asp-for="CountryId" />
+                        <input type="hidden" asp-for="StateId" />
+
+                        <form asp-action="Edit" class="wpcf7-form">
+                            <input type="hidden" asp-for="UserId" />
+                            <vc:summary />
+
+                            <div class="form-group">
+                                <label>
+                                    <i class="fa fa-user"></i> Full Name
+                                </label>
+                                <br>
+                                <span class="wpcf7-form-control-wrap">
+                                    <input asp-for="UserName" class="form-control" />
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </span>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label>
+                                    <i class="fa fa-envelope"></i> Email
+                                </label>
+                                <br />
+                                <span class="wpcf7-form-control-wrap">
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </span>
+                            </div>-->
+                            <!-- <div class="form-group">
+                                <label asp-for="LanguageId" class="black-label"></label>
+                                <input id="languages" name="LanguageId" style="width: 100%;" />
+                                <span class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="TimezoneId" class="black-label"></label>
+                                <input id="timezones" name="TimezoneId" style="width: 100%;" />
+                                <span class="text-danger"></span>
+                            </div> -->
+
+                            @await Component.InvokeAsync("Location", new { countryId = @Model.CountryId, stateId = @Model.StateId })
+
+                            <div class="form-group clearfix">
+                                <p>
+                                    <input type="submit" value="Save" class="wpcf7-form-control wpcf7-submit" />
+                                </p>
+                            </div>
+
+                            <div class="wpcf7-response-output wpcf7-display-none"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 store-info store-info-v2">
+            </div>
+        </div>
+    </div>
+</div>

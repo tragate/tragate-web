@@ -1,0 +1,44 @@
+@model List<Tragate.UI.Models.Category.GroupCategoryViewModel>
+
+@foreach (var root in Model){
+    <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu">
+        <a data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">
+            @root.GroupCategoryName <span class="caret"></span>
+        </a>
+        <ul role="menu" class="dropdown-menu">
+            <li class="menu-item menu-item-object-static_block animate-dropdown">
+                <div class="yamm-content">
+                    <div class="bg-yamm-content bg-yamm-content-bottom bg-yamm-content-right">
+                        <div class="kc-col-container">
+                            <div class="kc_single_image">
+                                <img src="@root.ImagePath" class="" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row yamm-content-row">
+                        @foreach (var category in root.CategoryList){
+                            <div class="col-sm-12">
+                                <div class="kc-col-container">
+                                    <div class="kc_text_block" style="margin-bottom: 1em;">
+                                        <div class="title">
+                                            <a asp-action="products" asp-controller="search" asp-route-category="@category.Slug">
+                                                <strong>@category.CategoryName</strong>
+                                            </a>
+                                        </div>
+                                        <ul>
+                                            @foreach (var sub in category.SubCategoryList){
+                                                <li>
+                                                    <a asp-action="products" asp-controller="search" asp-route-category="@sub.Slug">@sub.CategoryName</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </li>
+}

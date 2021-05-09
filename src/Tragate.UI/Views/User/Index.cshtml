@@ -1,0 +1,129 @@
+@model Tragate.UI.Models.User.UserDashboardViewModel
+@{
+    ViewData["Title"] = "User Profile";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@section Styles{ <link href="~/assets/css/custom-css/tile-dash.min.css" rel="stylesheet"/> }
+
+
+<div class="type-page hentry">
+    <header class="entry-header">
+        <div class="page-header-caption">
+            <h1 class="entry-title">Home</h1>
+        </div>
+    </header>
+    <div class="entry-content">
+        <div class="">
+            @if (Model.UserTodoList != null && Model.UserTodoList.Count > 0)
+            {
+                <div class="row">
+                    <div class="col-md-12 box big-text">
+                        <div class="box-title">To Do List</div>
+                        <ul class="list">
+                            @foreach (var item in Model.UserTodoList)
+                            {
+                                <li>
+                                    <a href="@item.Value">
+                                        <i class="fa fa-warning"></i> @item.Key
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="col-md-12 box">
+                    <div class="box-title">Company List</div>
+                    <ul class="list">
+                        @if (Model.UserCompanyList != null && Model.UserCompanyList.Count > 0)
+                        {
+                            foreach (var item in Model.UserCompanyList)
+                            {
+                                <li>
+                                    <a class="col-md-9" asp-controller="companyadmin" asp-action="index" asp-route-id="@item.CompanyId">
+                                        <div class="company-title">
+                                            <i class="fa fa-building"></i>@item.Name</div>
+                                    </a>
+                                    <div class="buttons col-md-3">
+                                        <a class="button button alt" href="@item.Slug/home">
+                                            <i class="fa fa-file-text-o"></i> View
+                                        </a>
+                                        <a class="button button alt" asp-controller="companyadmin" asp-action="index" asp-route-id="@item.CompanyId">
+                                            <i class="fa fa-cogs"></i> Manage
+                                        </a>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li>
+                                <p class="alert alert-warning">
+                                    You do not have a registered company.
+                                    <strong>Add new company immediately.</strong>
+                                    <a class="button" asp-controller="company" asp-action="register">Create New Company</a>
+                                </p>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="custom-dash-wrapper">
+                <a asp-controller="user" asp-action="messages">
+                    <div class="custom-dash">
+                        <div class="dash-title">
+                            <label asp-for="NewMessageCount"></label>
+                            <i class="fa fa-envelope-o"></i>
+                        </div>
+                        <div class="dash-content bcolor">
+                            <label>@Model.NewMessageCount</label>
+                        </div>
+                    </div>
+                </a>
+                <div class="custom-dash">
+                    <div class="dash-title">
+                        <label asp-for="TotalMessageCount"></label>
+                        <i class="fa fa-envelope-open-o"></i>
+                    </div>
+                    <div class="dash-content gcolor">
+                        <label>@Model.TotalMessageCount</label>
+                    </div>
+                </div>
+                <div class="custom-dash">
+                    <div class="dash-title">
+                        <label asp-for="NewQuoteCount"></label>
+                        <i class="fa fa-file-text-o"></i>
+                    </div>
+                    <div class="dash-content rcolor">
+                        <label>@Model.NewQuoteCount</label>
+                    </div>
+                </div>
+                <div class="custom-dash">
+                    <div class="dash-title">
+                        <label asp-for="TotalQuoteCount"></label>
+                        <i class="fa fa-file-archive-o"></i>
+                    </div>
+                    <div class="dash-content tcolor">
+                        <label>@Model.TotalQuoteCount</label>
+                    </div>
+                </div>
+                <a asp-controller="user" asp-action="company">
+                    <div class="custom-dash">
+                        <div class="dash-title">
+                            <label asp-for="CompanyCount"></label>
+                            <i class="fa fa-building-o"></i>
+                        </div>
+                        <div class="dash-content bcolor">
+                            <label>@Model.CompanyCount</label>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts { }

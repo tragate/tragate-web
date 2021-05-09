@@ -1,0 +1,33 @@
+<div class="twelve columns t-center">
+    <div class="ten columns offset-by-one">
+        <div class="form-group" style="text-align: center">
+            <i class="fa fa-check-circle fa-5x" style="color:#52bdd8;"></i>
+            <br />
+            <br />
+            <div class="alert alert-success">
+                <strong>
+                    Your company has been registered succesfully.
+                </strong>
+                <p>
+                    
+                </p>
+            </div>
+            <div style="text-align:center !important; display:inline-block;">
+                <img src="~/assets/images/loading.gif" width="100" />
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        iziToast.warning({
+            message: '<center>Your are being redirected your company page.<br/></center>',
+            target: '.alert.alert-success',
+            targetFirst: false,
+            timeout:5000
+        });
+        setTimeout(function () {
+            document.location.href = '@WebUrl.UserCompanies';
+        }, 5000);
+    });
+</script>

@@ -1,0 +1,127 @@
+@model Tragate.UI.Models.Company.CompanyProfileViewModel
+@{ ViewData["Title"] = @Model.Name + " / About"; ViewData["Description"] = @Model.Name + " products, contact information, email, address, phone, website"; Layout = "~/Views/Shared/_CompanyLayout.cshtml";
+}
+
+<link href="~/assets/css/custom-css/tile-dash.css" rel="stylesheet" />
+<style>
+    .tab-content {
+        padding: 10px;
+        min-height: 300px;
+    }
+
+    .profileImage {
+        max-height: 250px;
+        max-width: 280px;
+    }
+
+        .profileImage img {
+            width: 100%;
+        }
+
+    .company-details {
+        min-height: 400px;
+    }
+
+    .list-card-title label {
+        margin-bottom: 0;
+        font-weight: 500;
+        margin-right: 15px;
+    }
+
+    .bg-light {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        float: left;
+        margin-left: 3%;
+        width: 30%;
+        min-width: 250px;
+    }
+</style>
+
+<nav class="woocommerce-breadcrumb">
+    <span class="delimiter"><i class="fa fa-home"></i></span>
+    <a asp-action="index" asp-controller="home">TraGate</a>
+    <span class="delimiter"><i class="tm tm-breadcrumbs-arrow-right"></i></span>
+    <a asp-action="home" asp-controller="company">@Model.Name</a>
+    <span class="delimiter"><i class="tm tm-breadcrumbs-arrow-right"></i></span> About
+</nav>
+<section class="section-recent-posts-with-categories">
+    <div class="center-block">
+        <h1 class="section-title">@Model.Name / About</h1>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="basic-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Basic Info</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="basic-tab">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3 profileImage">
+                            <img src="@Model.ProfileImagePath" id="pp" />
+                            @if (Model.MembershipTypeId > 0)
+                            {
+                                <img src="~/assets/images/tragate-gold-company.png" style="display: inline; width: 130px; height: 130px; margin-top: 15px; text-align: center;" />
+                            }
+                        </div>
+                        <div class="col-sm-9 company-details">
+                            <div class="card" style="width: 100%;">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="Name"></label></div>
+                                        <div class="card-text">@Model.Name</div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="Categories"></label></div>
+                                        <div class="card-text">@Model.Categories</div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="BusinessTypeString"></label></div>
+                                        <div class="card-text">@Model.BusinessTypeString</div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="EstablishmentYear"></label></div>
+                                        <div class="card-text">@Model.EstablishmentYear</div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="Location"></label></div>
+                                        <div class="card-text">@Model.Location</div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="MembershipType"></label></div>
+                                        <div class="card-text">@Model.MembershipType</div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="VerificationType"></label></div>
+                                        <div class="card-text">@Model.VerificationType</div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="CreatedDate"></label></div>
+                                        <div class="card-text">@Model.CreatedDate.ToLongDateString()</div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="Description"></label></div>
+                                        <div class="card-text" style="text-align:left;">@Html.Raw(Model.Description)</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <br />
+                            <a class="button product_type_simple add_to_cart_button ContactSupplier" data-company-id="@Model.CompanyId">Contact Supplier</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="tab-pane fade" id="features" role="tabpanel" aria-labelledby="features-tab">
+                <div class="container">
+                    <div class="card bg-light mb-3" >
+                        <div class="card-header">Feature 1</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Light card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</section>
+@Html.Partial("_ContactSupplier")

@@ -1,0 +1,111 @@
+@model Tragate.UI.Models.Product.ProductDetailViewModel
+<div class="u-full-width productDetail" itemscope itemtype="https://schema.org/Product">
+    <div class="container">
+        <div class="twelve columns">
+            <div class="five columns">
+                <div class="two columns thumbs">
+                    <ul>
+                        @foreach (var item in Model.Images.OrderByDescending(x => x.Id))
+                        {
+                            <li><img src="@item.Path" data-index="@item.Id" alt="@Model.ProductTitle"/></li>
+                        }
+                    </ul>
+                </div>
+                <div class="ten columns img_wrapper">
+                    <ul data-slick>
+                        @foreach (var item in Model.Images.OrderByDescending(x => x.Id))
+                        {
+                            <li data-id="@item.Id" data-fancybox="Gallery" href="@item.Path"><img class="zoom" data-scale="1.5" src="@item.Path" alt="@Model.ProductTitle" /></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="four columns detail">
+                <h1 class="title" itemprop="name">@Model.ProductTitle</h1>
+                <div class="price">
+                    @if (Model.PriceLow == 0 && Model.PriceHigh == 0)
+                    {
+                        <label>Contact for price</label>
+                    }
+                    else
+                    {
+                        <label>@Model.Currency @Model.PriceLow.ToString("0.00") - @Model.PriceHigh.ToString("0.00") / @Model.UnitType </label>
+                    }
+
+                </div>
+                <ul>
+                    <li>
+                        <strong><label asp-for="MinimumOrder"></label>: </strong> @Model.MinimumOrder @Model.UnitType (s)
+                    </li>
+                    <li>
+                        <strong><label asp-for="SupplyAbility"></label>: </strong> @Model.SupplyAbility @Model.UnitType (s) / Month
+                    </li>
+                    <li>
+                        <strong><label asp-for="Categories"></label>: </strong>
+                        @foreach (var cat in Model.Category)
+                        {
+                            <a asp-action="products" asp-controller="search" asp-route-category="@cat.Slug">@cat.Title</a>
+                        }
+                    </li>
+                    <li>
+                        <strong><label asp-for="Brand"></label>: </strong> @Model.Brand
+                    </li>
+                    <li>
+                        <strong><label asp-for="ModelNumber"></label>: </strong> @Model.ModelNumber
+                    </li>
+                    <li>
+                        <strong><label asp-for="OriginLocation"></label>: </strong> @Model.OriginLocation
+                    </li>
+                </ul>
+                <button class="btn torquoise big ContactSupplier" data-product-id="@Model.Id" data-company-id="@Model.CompanyId">
+                    Contact Supplier
+                </button>
+            </div>
+            <div class="three columns companyDetail">
+                <div class="title">@Model.CompanyTitle</div>
+                <ul>
+                    <li>
+                        @Html.Raw(Model.MembershipType == "Free Membership" ? "<i class='far fa-bookmark'></i>" : "<img src='/assets/images/tragate-gold-company-icon.png' data-toggle=tooltip data-placement=top title='Gold Member' />")
+                        @Model.MembershipType
+                    </li>
+                    <li>
+                        @Html.Raw(Model.VerificationTypeId == 0 ? "<i class='far fa-circle'></i>" : "<i class='far fa-check-circle'></i>")
+                        @Model.VerificationType
+                    </li>
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i> @Model.Location / @Model.OriginLocation
+                    </li>
+                    <li>
+                        <i class="far fa-building"></i>Established @Model.EstablishmentYear
+                    </li>
+                </ul>
+                <a class="btn torquoise" asp-action="about" asp-controller="company" asp-route-slug="@Model.CompanySlug">
+                    View Company
+                </a>
+            </div>
+        </div>
+
+        <hr class="twelve columns">
+        <div class="twelve columns">
+            <div class="container max-1200">
+                <div class="twelve columns description">
+                    <div class="title">Description</div>
+                    <div class="text">@Html.Raw(@Model.Description)</div>
+                </div>
+        
+                <div class="twelve columns description">
+                    <div class="title">ShippingDetail</div>
+                    <div class="text">@Html.Raw(@Model.ShippingDetail)</div>
+                </div>
+
+   
+                <div class="twelve columns description">
+                    <div class="title">PackagingDetail</div>
+                    <div class="text">@Html.Raw(@Model.PackagingDetail)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_ContactSupplier")

@@ -1,0 +1,23 @@
+﻿@model List<Tragate.UI.Models.Category.GroupCategoryViewModel>
+
+@foreach (var category in Model)
+{
+    <div class="u-full-width"> 
+        <div class="container category">
+            <h4>@category.GroupCategoryName</h4>
+            <div class="row @("columns-" + category.CategoryList.Count) catSlider">
+                @foreach (var subcategory in category.CategoryList)
+                {
+                    <div class="subCategory">
+                        <a asp-action="products" asp-controller="search" asp-route-category="@subcategory.Slug">
+                            <div class="img_wrapper">
+                                <img alt="@subcategory.CategoryName" src="@subcategory.ImagePath"/>
+                            </div>
+                            <h5 class="">@subcategory.CategoryName</h5>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

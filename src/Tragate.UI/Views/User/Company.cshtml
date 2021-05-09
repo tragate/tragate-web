@@ -1,0 +1,49 @@
+@model Tragate.UI.Models.CompanyAdmin.CompanyAdminListViewModel
+@{ ViewData["Title"] = "User Companies"; Layout = "~/Views/Shared/_UserLayout.cshtml"; }
+
+<div class="type-page hentry">
+    <header class="entry-header">
+        <div class="page-header-caption row">
+            <h1 class="entry-title col-md-8">Company</h1>
+            <div class="col-md-4"><a asp-action="Register" asp-controller="Company" class="button float-right">Create a New Company</a></div>
+        </div>
+    </header>
+    <div class="entry-content">
+        <table class="shop_table cart wishlist_table">
+            <tbody>
+                @foreach (var item in Model.CompanyAdminList)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="home" asp-controller="company" asp-route-slug="@item.Slug">
+                                <img class="wp-post-image" src="@item.ProfileImagePath" width="80" />
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-action="home" asp-controller="company" asp-route-slug="@item.Slug">@item.Name</a>
+                        </td>
+                        <td>
+                            <a class="button button alt" asp-action="home" asp-controller="company" asp-route-slug="@item.Slug">
+                                <i class="fa fa-file-text-o"></i> View
+                            </a>
+                            <a class="button button alt" asp-action="index" asp-controller="companyadmin" asp-route-id="@item.CompanyId">
+                                <i class="fa fa-cogs"></i> Manage
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <nav class="woocommerce-pagination">
+            <cs-pager cs-paging-pagesize="10"
+                      cs-paging-pagenumber="@Model.PageNumber"
+                      cs-paging-totalitems="@Model.TotalCount"
+                      cs-pagenumber-param="page"
+                      cs-pager-ul-class="page-numbers"
+                      cs-pager-li-current-class="current"
+                      asp-controller="User"
+                      asp-action="Company">
+            </cs-pager>
+        </nav>
+    </div>
+</div>

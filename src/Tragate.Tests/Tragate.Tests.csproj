@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="FluentAssertions" Version="5.3.2" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.2.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.0.0" />
+    <PackageReference Include="Moq" Version="4.7.142" />
+    <PackageReference Include="xunit" Version="2.4.0-beta.2.build4010" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0-beta.2.build4010" />
+    <PackageReference Include="AntiXSS" Version="4.3.0" />
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Redis" Version="0.3.1" />
+    <PackageReference Include="cloudscribe.Web.Pagination" Version="2.1.*" />
+    <PackageReference Include="cloudscribe.Pagination.Models" Version="1.0.*" />
+    <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="2.0.0" />
+    <PackageReference Include="NEST" Version="6.1.0" />
+    <PackageReference Include="Serilog" Version="2.7.1" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="2.6.1" />
+    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="6.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tragate.UI\Tragate.UI.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.Production.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.Staging.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.Test.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    @if (Config.IsProduction())
+    {
+        <!-- Google Tag Manager -->
+        <script>
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+                var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-M7B7RMB');
+        </script>
+        <!-- End Google Tag Manager -->
+    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>@ViewData["Title"] | TraGate</title>
+    <meta name="description" content="TraGate.com is the marketplace that only consists of qualified Turkish Exporters." />
+    <meta name="keywords" content="tragate, trade gate, trade gate of turkey, e-commerce, turkish suppliers, turkish companies, turkish exporter, turkish exporters" />
+    <link rel="canonical" href="@Context.Request.Host@Context.Request.Path" />
+    <meta property="og:title" content="@ViewData["Title"] | TraGate" />
+    <meta property="og:description" content="TraGate is the Trade Gate of Turkey meaning that the B2B trade platform focused on promoting suppliers from Turkey to global market." />
+    <meta property="og:locale" content="en_TR" />
+    <meta property="og:url" content="@Context.Request.Host@Context.Request.Path" />
+    <meta property="og:image" content="@Config.Root/favicon/apple-icon-180x180.png" />
+    <meta property="og:site_name " content="TraGate" />
+    @if (Config.IsProduction())
+    {
+        <style>@Html.Raw(System.IO.File.ReadAllText(@"wwwroot/Content/css/style.min.css"));</style>
+    }
+    else
+    {
+        <link rel="stylesheet" type="text/css" href="@Config.Root/Content/css/style.css" media="all" asp-append-version="true" />
+        <meta name="robots" content="noindex, nofollow" />
+    }
+    <link rel="apple-touch-icon" sizes="57x57" href="@Config.Root/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="@Config.Root/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="@Config.Root/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="@Config.Root/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="@Config.Root/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="@Config.Root/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="@Config.Root/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="@Config.Root/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="@Config.Root/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="@Config.Root/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="@Config.Root/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="@Config.Root/favicon/favicon-96x96.png">
+    <link rel="manifest" href="@Config.Root/favicon/manifest.json">
+    @if (Config.IsProduction() == false)
+    {
+        <meta name="robots" content="noindex, nofollow" />
+    }
+    @if (IsSectionDefined("Styles"))
+    {
+        RenderSection("Styles", required: false);
+    }
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body class="preload @ViewData["Class"]">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M7B7RMB"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <header>
+        <div class="three columns logo">
+            <a asp-action="index" asp-controller="home" rel="Home">
+                <img src="/Content/images/logo.png">
+            </a>
+        </div>
+    </header>
+    @RenderBody()
+
+    <footer>
+        <div class="twelve columns signature">
+            <div class="u-pull-left">Copyright &copy; @DateTime.Now.Year <a asp-action="index" asp-controller="home">TraGate Bilgi Teknolojileri A.Ş.</a> All rights reserved.</div>
+            <div class="u-pull-right">
+                Made with
+                <i class="fa fa-heart"></i> in Istanbul, Turkey
+            </div>
+        </div>
+        <div class="backToTop"><i class="fas fa-chevron-up"></i></div>
+    </footer>
+</body>
+@if (Config.IsProduction())
+{
+    <script type="text/javascript" src="@Config.Root/Content/js/bundle.min.js" defer></script>
+    @RenderSection("Scripts", required: false)
+}
+else
+{
+    <script type="text/javascript" src="@Config.Root/Content/js/jquery-3.3.1.min.js" defer></script>
+    <script type="text/javascript" src="@Config.Root/Content/js/pace.min.js" defer></script>
+    <script type="text/javascript" src="@Config.Root/Content/js/slick.min.js" defer></script>
+    <script type="text/javascript" src="@Config.Root/Content/js/jquery.validate.min.js" defer></script>
+    <script type="text/javascript" src="@Config.Root/Content/js/modal.min.js" defer></script>
+    <script type="text/javascript" src="@Config.Root/Content/js/iziToast.min.js" defer></script>
+    @RenderSection("Scripts", required: false)
+    <script type="text/javascript" src="@Config.Root/Content/js/script.js" defer asp-append-version="true"></script>
+}
+<script src="https://apis.google.com/js/api:client.js" defer></script>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+@*<script src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>*@
+<div class="loading" id="loading"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
+<div class="modal fade" id="TragateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+<div class="modal fade" id="ExternalSignUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">SignUp Complete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="ajax tragate" method="post" action="/account/external-sign-up" validate>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label><i class="fa fa-user"></i> Your Full Name</label>
+                        <input type="text" name="fullName" placeholder="Your Full Name" readonly required/>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa fa-envelope"></i> Email</label>
+                        <input type="email" name="email" value="" readonly required/>
+                    </div>
+                    @await Component.InvokeAsync("Location", new { })
+                    <div class="form-group">
+                        <div class="mcheckbox">
+                            <input type="checkbox" name="UserTermCheckBox" id="UserTermCheckBox" value="false" checked required>
+                            <label for="UserTermCheckBox"></label>
+                        </div>
+                        <label for="UserTermCheckBox">
+                            I accept TraGate
+                            <span class="ShowTrageteModal" data-url="/content/user-terms/json" data-title="User Terms" style="text-decoration:underline;">
+                                User Terms
+                            </span>
+                            and
+                            <span class="ShowTrageteModal" data-url="/content/privacy-policy/json" data-title="User Terms" style="text-decoration:underline;">
+                                Privacy Policy
+                            </span>
+                        </label>
+                    </div>
+                    <br/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn torquoise submit">Login</button>
+                    <div type="button" class="btn btn-secondary" data-dismiss="modal">Close</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+@model Tragate.UI.Models.User.UserProfileViewModel
+
+<script>
+    window.onload = function () {
+        $("#files").kendoUpload({
+            async: {
+                autoUpload: false,
+                saveUrl: "@Model.Url/@Model.UserId"
+            },
+            success: function(result) {
+                setTimeout(function () {
+                    window.location.reload();
+                }, 2000);
+            },
+            error: function(e) {
+
+            }
+        });
+    }
+</script>
+<input name="files" id="files" type="file" />

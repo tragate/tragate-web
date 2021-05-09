@@ -1,0 +1,86 @@
+@model Tragate.UI.Models.Company.CompanyProductListViewModel
+@{
+    ViewData["Title"] = @Model.Name + " / Products";
+    ViewData["Description"] = @Model.Name + " products, contact information, email, address, phone, website";
+    Layout = "~/Views/Shared/_CompanyLayout.cshtml";
+}
+
+@section Styles{
+    <link href="~/assets/css/custom-css/img-arranger.css" rel="stylesheet">
+}
+
+<nav class="woocommerce-breadcrumb">
+    <span class="delimiter">
+        <i class="fa fa-home"></i>
+    </span>
+    <a asp-action="index" asp-controller="home">TraGate</a>
+    <span class="delimiter">
+        <i class="tm tm-breadcrumbs-arrow-right"></i>
+    </span>
+    <a asp-action="home" asp-controller="company" asp-route-slug="@Model.Slug">@Model.Name</a>
+    <span class="delimiter">
+        <i class="tm tm-breadcrumbs-arrow-right"></i>
+    </span> Products
+</nav>
+<section class="section-recent-posts-with-categories">
+<div class="tab-content">
+    <div id="grid-extended" class="tab-pane active" role="tabpanel">        
+        <h1 class="section-title">@Model.Name / Products</h1>
+        <div class="woocommerce columns-4">
+            <div class="products">
+                @{
+                    foreach (var item in @Model.CompanyProductList)
+                    {
+                        <input type="hidden" class="company-slug" value="@item.Company.Slug"/>
+                        <div class="product">
+                            <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link"
+                               asp-action="product" asp-controller="company" asp-route-productslug="@item.Slug">
+                                <div class="img_wrapper">
+                                    <img src="@item.ListImagePath"/>
+                                </div>
+                                <span class="price">
+                                    <span class="woocommerce-Price-amount amount">
+
+                                        @if (item.PriceLow == 0 && item.PriceHigh == 0)
+                                        {
+                                            <label>Contact for price</label>
+                                        }
+                                        else
+                                        {
+                                            <label>@item.Currency @item.PriceLow.ToString("0.00") - @item.PriceHigh.ToString("0.00") / @item.UnitType</label>
+                                        }
+
+
+                                    </span>
+                                    <h2 class="woocommerce-loop-product__title">@item.Title</h2>
+                                </span>
+                            </a>
+
+                            <a class="button product_type_simple add_to_cart_button ContactSupplier" data-product-id="@item.ProductId" data-company-id="@item.CompanyId">Contact Supplier</a>
+                        </div>
+                    }
+                    <div class="loading">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="shop-control-bar-bottom">
+    <nav class="woocommerce-pagination">
+        <cs-pager cs-paging-pagesize="20"
+                  cs-paging-pagenumber="@Model.PageNumber"
+                  cs-paging-totalitems="@Model.TotalCount"
+                  cs-pagenumber-param="page"
+                  cs-pager-ul-class="page-numbers"
+                  cs-pager-li-current-class="current"
+                  asp-controller="Company"
+                  asp-action="Products">
+        </cs-pager>
+    </nav>
+</div>
+</section>
+@Html.Partial("_ContactSupplier")

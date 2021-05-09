@@ -1,0 +1,72 @@
+[
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/assets/css/techmarket-font-awesome.min.css",
+    "inputFiles": [
+      "wwwroot/assets/css/techmarket-font-awesome.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/css/style.min.css",
+    "inputFiles": [
+      "wwwroot/assets/css/style.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/css/custom-css/tile-dash.min.css",
+    "inputFiles": [
+      "wwwroot/assets/css/custom-css/tile-dash.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/assets/js/scripts.min.js",
+    "inputFiles": [
+      "wwwroot/assets/js/scripts.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Content/js/modal.min.js",
+    "inputFiles": [
+      "wwwroot/Content/js/modal.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Content/js/jquery.validate.min.js",
+    "inputFiles": [
+      "wwwroot/Content/js/jquery.validate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Content/js/iziToast.min.js",
+    "inputFiles": [
+      "wwwroot/Content/js/iziToast.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/Content/js/bundle.js",
+    "inputFiles": [
+      "wwwroot/Content/js/jquery-3.3.1.min.js",
+      "wwwroot/Content/js/pace.min.js",
+      "wwwroot/Content/js/slick.min.js",
+      "wwwroot/Content/js/jquery.validate.js",
+      "wwwroot/Content/js/modal.js",
+      "wwwroot/Content/js/iziToast.js",
+      "wwwroot/Content/js/script.js"
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+<div class="entry-content">
+    <section class="section terms-conditions">
+        <div class="form-group" style="text-align: center">
+            <i class="fa fa-check-circle fa-5x" style="color:green;"></i>
+            <br />
+            <div class="alert alert-success">
+                <strong>
+                    Your password has been changed succesfully.
+                </strong>
+                <p>
+                    Your are being redirected your profile page.
+                </p>
+            </div>
+            <div style="text-align:center !important; display:inline-block;">
+                <img src="~/assets/images/loading.gif" width="100" />
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            document.location.href = '@WebUrl.User';
+        }, 2000);
+    });
+</script>

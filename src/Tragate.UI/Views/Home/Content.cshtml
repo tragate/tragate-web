@@ -1,0 +1,16 @@
+﻿@model Tragate.UI.Models.Content.ContentViewModel
+@{
+    ViewData["Title"] = @Model.Title;
+    Layout = (ViewBag.Json == true ? "" : "~/Views/NewShared/HomeLayout.cshtml");
+}
+
+<div class="u-full-width main">
+    <div class="container max-1200">
+        <div class="eight columns offset-by-two">
+            <h1 class="page-title">@Model.Title</h1>
+            <div class="u-full-width font-16">
+                @Html.Raw(Model.Body)
+            </div>
+        </div>
+    </div>
+</div> 

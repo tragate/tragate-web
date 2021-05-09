@@ -1,0 +1,32 @@
+﻿@model List<Tragate.UI.Models.Category.GroupCategoryViewModel>
+@{
+    int count = Model.Count();
+    int i = 1;
+}
+@foreach (var root in Model)
+{
+    <li class="category@(i == count ? " last" : "")">
+        <a href="#">
+            @root.GroupCategoryName
+            <i class="fas fa-chevron-right"></i>
+            <div class="space"></div>
+        </a>
+        <div class="subMenu" @(String.IsNullOrEmpty(@root.ImagePath) ? "" : "style='background-image:" + @root.ImagePath + "'")>
+            @foreach (var category in root.CategoryList)
+            {
+                <div class="subCategory">
+                    <a asp-action="products" asp-controller="search" asp-route-category="@category.Slug">@category.CategoryName</a>
+                    <ul>
+                        @foreach (var sub in category.SubCategoryList)
+                        {
+                            <li>
+                                <a asp-action="products" asp-controller="search" asp-route-category="@sub.Slug">@sub.CategoryName</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </li>
+    i++;
+}

@@ -1,0 +1,91 @@
+@model Tragate.UI.Models.User.UserProfileViewModel
+@{ ViewData["Title"] = "User Settings"; Layout = "~/Views/Shared/_UserLayout.cshtml"; }
+<style>
+    .k-widget {
+        width: 50%;
+    }
+
+    #image-loading {
+        margin-left: 33px;
+        position: absolute;
+        color: #fff;
+        font-size: 35px;
+        z-index: 100;
+        margin-top: 25px;
+        display: none;
+    }
+</style>
+<div class="type-page hentry">
+    <header class="entry-header">
+        <div class="page-header-caption">
+            <h1 class="entry-title">Settings</h1>
+        </div>
+    </header>
+    <div class="entry-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tm-shop-attributes-detail like-column columns-3">
+                    <table class="shop_attributes">
+                        <tbody>
+                            <tr>
+                                <th>Profile Image</th>
+                                <td>
+                                    <i class="fa fa-spinner fa-spin" id="image-loading"></i>
+                                    <img src="@Model.ProfileImagePath" width="100" />
+                                    <br />
+                                    <input name="files" class="ImageUpload" data-url="@("/user/image-upload/" + Model.UserId)" type="file" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>FullName</th>
+                                <td>@Model.UserName</td>
+                            </tr>
+                            <tr>
+                                <th>E-mail</th>
+                                <td>
+                                    @Model.Email
+                                    <br />
+                                    <a href="/user/changeemail" class="button">
+                                        <i class="fa fa-envelope"></i> Change Email
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Password</th>
+                                <td>
+                                    <a href="/user/changepassword" class="button">
+                                        <i class="fa fa-lock"></i> Change Password
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Language</th>
+                                <td>@Model.LanguageId</td>
+                            </tr>
+                            <tr>
+                                <th>Timezone</th>
+                                <td>@Model.TimezoneId</td>
+                            </tr>
+                            <tr>
+                                <th>Location</th>
+                                <td>@Model.LocationName</td>
+                            </tr>
+                            <tr>
+                                <th>Created Date</th>
+                                <td>@Model.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <a href="/user/edit/@Model.UserId" class="button">
+                                        <i class="fa fa-edit"></i> Edit Profile
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

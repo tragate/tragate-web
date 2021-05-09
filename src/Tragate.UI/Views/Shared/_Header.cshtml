@@ -1,0 +1,85 @@
+
+<header id="masthead" class="site-header header-v3" style="background-image: none;">
+    <div class="col-full desktop-only">
+        <div class="techmarket-sticky-wrap">
+            <div class="row">
+                <div class="site-branding">
+                    <a asp-action="index" asp-controller="home" class="custom-logo-link" rel="home">
+                        <img src="~/assets/images/logo-t.png">
+                    </a>
+                </div>
+                <div id="departments-menu" class="dropdown departments-menu">
+                    <button class="btn dropdown-toggle btn-block" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="tm tm-departments-thin"></i>
+                        <span>All Departments</span>
+                    </button>
+                    <ul id="mainMenu" class="dropdown-menu yamm departments-menu-dropdown">
+                        <cache expires-after="@TimeSpan.FromHours(1)">
+                            @await Component.InvokeAsync("CategoryGroupMenu")
+                        </cache>
+                    </ul>
+                </div>
+                                @{
+                                    var cKey = Context.Request.Query["key"].ToString();
+                                    var cSearchType = ViewData["SearchType"] == null ? "products" : ViewData["SearchType"];
+                                }
+                                <form class="navbar-search" method="get" asp-action="@cSearchType" asp-controller="search" asp-route-category="all">
+    <label class="sr-only screen-reader-text" for="search">Search for:</label>
+    <div class="input-group">
+        <input type="text" id="search" class="form-control search-field product-search-field" value="@cKey" name="key" placeholder="Search products and companies"/>
+        <div class="input-group-btn">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search"></i>
+                <span class="search-btn">Search</span>
+            </button>
+        </div>
+    </div>
+</form>
+                @await Component.InvokeAsync("LoginStatus")
+            </div>
+        </div>
+    </div>    
+    <div class="col-full handheld-only">
+        <div class="handheld-header">
+            <div class="row">
+                <div class="site-branding">
+                    <a asp-action="index" asp-controller="home" class="custom-logo-link" rel="home">
+                        <img src="~/assets/images/logo-t.png">
+                    </a>
+                </div>
+            </div>
+            <div class="techmarket-sticky-wrap">
+                <div class="row">
+                    <nav id="handheld-navigation" class="handheld-navigation" aria-label="Handheld Navigation">
+                        <button class="btn navbar-toggler" type="button">
+                            <i class="tm tm-departments-thin"></i>
+                            <span>Menu</span>
+                        </button>
+                        <div class="handheld-navigation-menu">
+                            <span class="tmhm-close">Close</span>
+                            <ul id="menu-departments-menu-1" class="nav">
+                                @await Component.InvokeAsync("LoginStatusMobile")
+                                @Html.Partial("_TragateContentMobile")
+                                <cache expires-after="@TimeSpan.FromHours(1)">
+                                    @await Component.InvokeAsync("CategoryGroupMenuMobile")
+                                </cache>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="site-search">
+                        <div class="widget woocommerce widget_product_search">
+                            <form role="search" method="get" class="woocommerce-product-search" asp-action="@cSearchType" asp-controller="search" asp-route-category="all">
+                                <label class="screen-reader-text" for="woocommerce-product-search-field-0">Search for:</label>
+                                <input type="search" name="key" class="search-field" placeholder="Search products and companies" value="@cKey"/>
+                                <input type="submit" value="Search"/>
+                            </form>
+                        </div>
+                    </div>
+                    <a class="handheld-header-cart-link has-icon" asp-action="index" asp-controller="user">
+                        <i class="tm tm-login-register"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

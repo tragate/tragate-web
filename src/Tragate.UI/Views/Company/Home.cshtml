@@ -1,0 +1,127 @@
+@model Tragate.UI.Models.Company.CompanyProfileViewModel
+@{
+    ViewData["Title"] = @Model.Name;
+    ViewData["Description"] = @Model.Name + " products, contact information, email, address, phone, website";
+    Layout = "~/Views/Shared/_CompanyLayout.cshtml";
+}
+
+@section Styles{
+    <style>
+        .light-title { font-weight: 100; }
+    </style>
+}
+
+<section class="section-recent-posts-with-categories">
+    <h1 class="section-title">@Model.Name</h1>
+</section>
+<div class="features-list">
+    <div class="features">
+        <div class="feature">
+            <div class="media">
+                <i class="feature-icon d-flex mr-3 tm tm-free-delivery"></i>
+                <div class="media-body feature-text">
+                    <h5 class="mt-0">@Model.Location</h5>
+                    <span>
+                        <label class="light-title" asp-for="Location"></label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="feature">
+            <div class="media">
+                <i class="feature-icon d-flex mr-3 tm tm-feedback"></i>
+                <div class="media-body feature-text">
+                    <h5 class="mt-0">@Model.EstablishmentYear</h5>
+                    <span>
+                        <label class="light-title" asp-for="EstablishmentYear"></label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="feature">
+            <div class="media">
+                <i class="feature-icon d-flex mr-3 tm tm-free-return"></i>
+                <div class="media-body feature-text">
+                    <h5 class="mt-0">@Model.TransactionCount</h5>
+                    <span>
+                        <label class="light-title" asp-for="TransactionCount"></label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="feature">
+            <div class="media">
+                <i class="feature-icon d-flex mr-3 tm tm-safe-payments"></i>
+                <div class="media-body feature-text">
+                    <h5 class="mt-0">@Model.MembershipType</h5>
+                    <span>
+                        <label class="light-title" asp-for="MembershipType"></label>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="feature">
+            <div class="media">
+                <i class="feature-icon d-flex mr-3 tm tm-best-brands"></i>
+                <div class="media-body feature-text">
+                    <h5 class="mt-0">@Model.VerificationType</h5>
+                    <span>
+                        <label class="light-title" asp-for="VerificationType"></label>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="section-products-with-image">
+    <header class="section-header">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="section-title" style="padding: 3.25em 0.938em;">Company Products</h2>
+            </div>
+            <div class="col-md-6" style="text-align: center;">
+                <img alt="" src="@Model.ProfileImagePath" style="height: 300px; display: inline-block; margin: 35px;">
+            </div>
+        </div>
+    </header>
+    <div class="woocommerce columns-4">
+        <div class="products">
+            @if (Model.CompanyProductList.Any())
+            {
+                foreach (var item in @Model.CompanyProductList)
+                {
+                    <input type="hidden" class="company-slug" value="@item.Company.Slug"/>
+                    <div class="product">
+                        <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" asp-action="product" asp-controller="company" asp-route-productslug="@item.Slug">
+                            <div class="img_wrapper">
+                                <img src="@item.ListImagePath"/>
+                            </div>
+                            <span class="price">
+                                <span class="woocommerce-Price-amount amount">
+                                    @if (item.PriceLow == 0 && item.PriceHigh == 0)
+                                    {
+                                        <label>Contact for price</label>
+                                    }
+                                    else
+                                    {
+                                        <label>@item.Currency @item.PriceLow.ToString("0.00") - @item.PriceHigh.ToString("0.00") / @item.UnitType</label>
+                                    }
+                                </span>
+                                <h2 class="woocommerce-loop-product__title">@item.Title</h2>
+                            </span>
+                        </a>
+
+                        <a class="button product_type_simple add_to_cart_button ContactSupplier" data-product-id="@item.ProductId" data-company-id="@item.CompanyId">Contact Supplier</a>
+                    </div>
+                }
+            }
+            else
+            {
+                <h3>Company has no products as of now</h3>
+            }
+        </div>
+    </div>
+    <a asp-action="Products" asp-controller="company" class="load-more-button">Show All Products</a>
+</section>
+@Html.Partial("_ContactSupplier")

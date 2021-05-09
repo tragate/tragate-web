@@ -1,0 +1,107 @@
+ @model Tragate.UI.Models.Company.CompanyProfileViewModel 
+@{ ViewData["Title"] = "Company Settings"; Layout = "~/Views/Shared/_CompanyAdminLayout.cshtml"; }
+
+<div class="type-page hentry">
+    <header class="entry-header">
+        <div class="page-header-caption">
+            <h1 class="entry-title">Settings</h1>
+        </div>
+    </header>
+    <div class="entry-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tm-shop-attributes-detail like-column columns-3">
+                    <table class="shop_attributes">
+                        <tbody>
+                            <tr>
+                                <th>Profile Image</th>
+                                <td>
+                                    @if(!string.IsNullOrEmpty(Model.ProfileImagePath) && !Model.ProfileImagePath.Contains("profile-item")){
+                                    <img src="@Model.ProfileImagePath" width="100" /> }else {
+                                    <img src="@Model.ProfileImagePath" width="100" /> }
+                                    <br/> 
+                                    <input name="files" class="ImageUpload" data-url="@("/companyadmin/profile-image-upload/" + Model.CompanyId)" type="file" />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Company Name</th>
+                                <td>@Model.Name</td>
+                            </tr>
+                            <tr>
+                                <th>Categories</th>
+                                <td>@Model.Categories</td>
+                            </tr>
+                            <tr>
+                                <th>Description</th>
+                                <td>@Html.Raw(Model.Description)</td>
+                            </tr>
+                            <tr>
+                                <th>Business Types</th>
+                                <td>@Model.BusinessTypeString</td>
+                            </tr>
+                            <tr>
+                                <th>Establishment Year</th>
+                                <td>@Model.EstablishmentYear</td>
+                            </tr>
+                            <tr>
+                                <th>Tax Office</th>
+                                <td>@Model.TaxOffice</td>
+                            </tr>
+                            <tr>
+                                <th>Tax Number</th>
+                                <td>@Model.TaxNumber</td>
+                            </tr>
+                            <tr>
+                                <th>Annual Revenue</th>
+                                <td>@Model.AnnualRevenue</td>
+                            </tr>
+                            <tr>
+                                <th>Employee Count</th>
+                                <td>@Model.EmployeeCount</td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td>@Model.Address</td>
+                            </tr>
+                            <tr>
+                                <th>Website</th>
+                                <td>@Model.Website</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>@Model.Email</td>
+                            </tr>
+                            <tr>
+                                <th>Phone</th>
+                                <td>@Model.Phone</td>
+                            </tr>
+                            <tr>
+                                <th>Location</th>
+                                <td>@Model.Location</td>
+                            </tr>
+                            <tr>
+                                <th>Company Status</th>
+                                <td>@Model.Status</td>
+                            </tr>
+                            <tr>
+                                <th>User Status</th>
+                                <td>@Model.UserStatus</td>
+                            </tr>
+                            <tr>
+                                <th>Created Date</th>
+                                <td>@Model.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <a asp-action="edit" asp-route-id="@Model.CompanyId" class="button">Edit Company Profile</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

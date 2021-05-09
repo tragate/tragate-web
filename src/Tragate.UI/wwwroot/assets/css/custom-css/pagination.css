@@ -1,0 +1,57 @@
+.woocommerce-pagination {
+    padding: 1em 0;
+    border-width: 1px 0;
+    text-align: center;
+    clear: both;
+}
+.woocommerce-pagination ul {
+    margin: 0;
+}
+.woocommerce-pagination ul::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+.woocommerce-pagination ul li {
+    display: inline-block;
+}
+.woocommerce-pagination ul li {
+    font-size: 1em;
+    display: inline-block;
+    padding: 0.667em 1.133em;
+    color: #444444;
+    font-weight: 500;
+    line-height: 1.543em;
+}
+.woocommerce-pagination ul li.current {
+    background-color: #0063d1;
+    color: #fff;
+    padding: 0.733em 1.4em;
+    border-radius: 5px;
+}
+.woocommerce-pagination ul li.next,
+.woocommerce-pagination ul li.prev {
+    font-size: 0px;
+    vertical-align: middle;
+}
+.woocommerce-pagination ul li.next:after,
+.woocommerce-pagination ul li.prev:after {
+    font-family: techmarket-icons;
+    font-size: 31px;
+    opacity: 0.5;
+    margin: 0px 5px;
+    line-height: 1;
+}
+.woocommerce-pagination ul li.next:after {
+    content: "\74";
+}
+.woocommerce-pagination ul li.prev:after {
+    content: "\75";
+}
+.woocommerce-pagination ul li a:hover {
+    opacity: 0.8;
+}
+.rtl .woocommerce-pagination a.next,
+.rtl .woocommerce-pagination a.prev {
+    transform: rotateY(180deg);
+}

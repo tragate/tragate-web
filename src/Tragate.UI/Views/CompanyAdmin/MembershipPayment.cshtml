@@ -1,0 +1,76 @@
+@model Tragate.UI.Models.Company.CompanyProfileViewModel
+@{ ViewData["Title"] = "Membership Payment"; Layout = "~/Views/Shared/_CompanyAdminLayout.cshtml"; }
+<div class="type-page hentry">
+    <header class="entry-header">
+        <div class="page-header-caption">
+            <h1 class="entry-title">Membership Payment</h1>
+        </div>
+    </header>
+    <div class="entry-content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-form">
+                    <div role="form" class="wpcf7" id="wpcf7-f425-o1" lang="en-US" dir="ltr">
+                        <div class="screen-reader-response"></div>
+                        <form action="/companyadmin/membershippayment/605" method="post" id="CompanyEdit">
+
+                            <input type="hidden" asp-for="CompanyId" />
+                            <input type="hidden" asp-for="ProfileImagePath" />
+                            <input type="hidden" asp-for="VerificationTypeId" />
+                            <input type="hidden" asp-for="WebsitePoint" />
+                            <input type="hidden" asp-for="WebsiteProductCount" />
+                            <div class="form-group">
+                                <label>1 Yıllık TraGate Gold Üyelik Bedeli - KDV Dahil 1770 TL</label>
+                            </div>
+                            <input type="hidden" name="StatusId" id="StatusId" value="@Model.StatusId" />
+                            <div class="form-group">
+                                <label>Kart Üzerindeki İsim</label>
+                                <input class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Kart Numarası</label>
+                                <input class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Son Kullanım Tarihi (AA/YY)</label>
+                                <input class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label>CVV2 güvenlik kodu</label>
+                                <input class="form-control" required />
+                            </div>
+                            <div class="form-group clearfix">
+                                
+                <div class="mcheckbox">
+                    <input type="checkbox" name="UserTermCheckBox" id="UserTermCheckBox0" value="false" checked required>
+                    <label for="UserTermCheckBox0"></label>
+                </div>
+                <label for="UserTermCheckBox0">
+                    TraGate
+                    <span class="ShowTrageteModal" data-url="/content/user-terms/json" data-title="User Terms" style="text-decoration:underline;">
+                        Kullanıcı Koşullarını
+                    </span>
+                    ve
+                    <span class="ShowTrageteModal" data-url="/content/company-policy/json" data-title="User Terms" style="text-decoration:underline;">
+                        Firma Üyelik Potilikasını
+                    </span>
+                    kabul ediyorum.
+                </label>
+                            </div>
+                            <div class="form-group clearfix">
+                                <p>
+                                    <button id="CompanySave" class="button">Satın Al</button>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <img src="https://www.emaycenter.com/image/cache/catalog/iyzico-uye-isyeri-1140x380.jpg" height="100" >
+                            </div>
+                            <div class="wpcf7-response-output wpcf7-display-none"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 store-info store-info-v2"></div>
+        </div>
+    </div>
+</div>

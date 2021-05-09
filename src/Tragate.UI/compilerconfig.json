@@ -1,0 +1,22 @@
+[
+  {
+    "outputFile": "wwwroot/assets/css/style_new.css",
+    "inputFile": "wwwroot/assets/css/style_new.scss",
+    "sourceMap": false
+  },
+  {
+    "outputFile": "wwwroot/assets/sass/style.css",
+    "inputFile": "wwwroot/assets/sass/style.scss",
+    "sourceMap": false
+  },
+  {
+    "outputFile": "wwwroot/assets/js/scripts.es5.js",
+    "inputFile": "wwwroot/assets/js/scripts.js",
+    "sourceMap": false
+  },
+  {
+    "outputFile": "wwwroot/Content/css/style.css",
+    "inputFile": "wwwroot/Content/css/style.scss",
+    "sourceMap": false
+  }
+]

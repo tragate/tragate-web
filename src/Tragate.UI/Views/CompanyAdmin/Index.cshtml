@@ -1,0 +1,62 @@
+@model Tragate.UI.Models.CompanyAdmin.CompanyAdminDashboardViewModel
+@{ ViewData["Title"] = "Manage Company"; Layout = "~/Views/Shared/_CompanyAdminLayout.cshtml"; }
+@section Styles{
+    <link href="~/assets/css/custom-css/tile-dash.css" rel="stylesheet" />
+}
+<div class="type-page hentry">
+    <header class="entry-header">
+        <div class="page-header-caption">
+            <h1 class="entry-title">Home</h1>
+        </div>
+    </header>
+    <div class="entry-content">
+        @if (Model.CompanyAdminTodoList != null && Model.CompanyAdminTodoList.Count > 0)
+        {
+            <div class="row">
+                <div class="col-md-12 box big-text">
+                    <div class="box-title">To Do List</div>
+                    <ul class="list">
+                        @foreach (var item in Model.CompanyAdminTodoList)
+                        {
+                            <li>
+                                <a href="@item.Value">
+                                    <i class="fa fa-warning"></i> @item.Key
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+        <div class="custom-dash-wrapper">
+            <div class="custom-dash">
+                <div class="dash-title">
+                    <label asp-for="MessageCount"></label>
+                    <i class="fa fa-envelope-open-o"></i>
+                </div>
+                <div class="dash-content bcolor"><label>@Model.MessageCount</label></div>
+            </div>
+            <div class="custom-dash">
+                <div class="dash-title">
+                    <label asp-for="QuoteCount"></label>
+                    <i class="fa fa-file-text-o"></i>
+                </div>
+                <div class="dash-content gcolor"><label>@Model.QuoteCount</label></div>
+            </div>
+            <div class="custom-dash">
+                <div class="dash-title">
+                    <label asp-for="ProductCount"></label>
+                    <i class="fa fa-cubes"></i>
+                </div>
+                <div class="dash-content rcolor"><label>@Model.ProductCount</label></div>
+            </div>
+            <div class="custom-dash">
+                <div class="dash-title">
+                    <label asp-for="AdminCount"></label>
+                    <i class="fa fa-users"></i>
+                </div>
+                <div class="dash-content tcolor"><label>@Model.AdminCount</label></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿@model List<Tragate.UI.Models.Category.CategoryViewModel>    
+                                @{
+                                    var cSearchType = ViewData["SearchType"] == null ? "products" : ViewData["SearchType"];
+                                }
+<li class="hasSubMenu mobile">
+    <a href="#" onclick="return false;">
+        <i class="fas fa-sitemap"></i>
+        Categories
+    </a>
+    <ul>       
+                    @foreach (var category in Model.OrderBy(q=> q.CategoryName)){
+                    <li>
+                            <a asp-controller="search" asp-action="@cSearchType" asp-route-category="@category.Slug">
+                                <i class="fa fa-chevron-right"></i>@category.CategoryName
+                            </a>
+                    </li>
+                    }
+    </ul>
+</li>

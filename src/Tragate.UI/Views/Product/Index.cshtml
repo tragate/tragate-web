@@ -1,0 +1,54 @@
+﻿@model Tragate.UI.Models.Product.ProductDetailViewModel
+@{
+    ViewData["Title"] = @Model.ProductTitle + " / Product Info";
+    ViewData["Description"] = @Model.ProductTitle + " / Product Info, description, price, shipping information, packaging information, products, contact information, email, address, phone, website, turkish exporter supplier" + @Model.CompanyTitle;
+    Layout = "~/Views/NewShared/HomeLayout.cshtml";
+}
+<div class="u-full-width breadcrumbs">
+    <div class="container">
+        <div class="tags twelve columns">
+            <div class="categories twelve columns">
+                <i class="fa fa-home"></i>
+                @foreach (var item in Model.Category)
+                {
+                    <a asp-action="products" asp-controller="search" asp-route-category="@item.Slug">@item.Title</a>
+                }
+
+                <a href="#">@Model.ProductTitle</a>
+            </div>
+        </div>
+        <hr class="twelve columns" />
+    </div>
+</div>
+
+@await Component.InvokeAsync("CompanyProduct", new { model = @Model, view = "new" })
+
+
+@section Styles{
+    <link href="~/Content/css/jquery.fancybox.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script type="text/javascript" src="~/Content/js/jquery.fancybox.min.js" defer asp-append-version="true"></script>
+    <script type="text/javascript" src="~/Content/js/zoom.js" defer></script>
+    <script>
+        window.onload = function () {
+            $('.img_wrapper [data-slick]').slick({
+                dots: false,
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear',
+                arrows: true,
+                adaptiveHeight: false
+            });
+
+            $('.thumbs ul li img').click(function () {
+                var index = $(this).data('index');
+                $('.img_wrapper [data-slick]').slick('slickGoTo', $('.slick-track li[data-id=' + index + ']').index());
+            });
+
+            $('.thumbs').css('max-height', $('.img_wrapper').height());
+        }
+    </script>
+}
+

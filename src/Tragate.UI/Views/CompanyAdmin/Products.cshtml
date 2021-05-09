@@ -1,0 +1,140 @@
+﻿@model Tragate.UI.Models.CompanyAdmin.CompanyAdminProductListViewModel
+@{
+    ViewData["Title"] = "Company Products";
+    Layout = "~/Views/Shared/_CompanyAdminLayout.cshtml";
+}
+@section Styles{
+    <link rel="stylesheet" type="text/css" href="~/assets/css/custom-css/pagination.css" media="all" />
+    <style>
+        .nailthumb-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+    </style>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+    function ChangeStatus(that,productId) {
+             var data = $(that).data();
+             var statusId = data.status == 3 ? 5 : 3;
+             $.ajax({
+                 type: 'POST',
+                 url: '@ApplicationUrl.ChangeStatus',
+                 data: {
+                     'Id': productId,
+                     'StatusId': statusId
+                 }
+             }).done(function (response) {
+                 if (response.success) {
+                     $(that).data('status', statusId);
+                     if (statusId == 3) {
+                         $(that).find('input[type=checkbox]').prop('checked', true);
+                         toastr["success"](response.message);
+                     } else {
+                         $(that).find('input[type=checkbox]').prop('checked', false);
+                         toastr["warning"](response.message);
+                     }
+                 } else {
+                     toastr["warning"](response.errors[0]);
+                 }
+             });
+         }
+    </script>
+}
+
+<div class="type-page hentry">
+    <header class="entry-header" style="border-bottom:0;">
+        <div class="page-header-caption">
+            <h1 class="entry-title">Products</h1>
+        </div>
+    </header>
+    <form asp-action="Products" asp-controller="companyadmin" method="post">
+        <input type="hidden" asp-for="CompanyId" />
+        <input type="hidden" asp-for="PageNumber" value="1" />
+        <input type="hidden" asp-for="PageSize" value="25" />
+        <div class="entry-content">
+            <table class="shop_table cart wishlist_table">
+                <thead>
+                    <tr>
+                        <td colspan="2">
+                            <div class="yith-wcwl-share">
+                                <a asp-action="ProductCategory" asp-route-id="@Model.CompanyId" class="button">Create a New Product</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="yith-wcwl-share">
+                                <select id="status" asp-for="StatusId">
+                                    <option value="0" selected="selected">All Product</option>
+                                    <option value="3">Active</option>
+                                    <option value="5">Passive</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td colspan="2">
+                            <div class="yith-wcwl-share float-right">
+                                <input type="text" placeholder="Search" asp-for="SearchKey" value="@Model.SearchKey" />
+                                <input type="submit" value="Search" class="btn btn-info" />
+                                <a href="/companyadmin/products/@Model.CompanyId" class="btn btn-info">Clear Search</a>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ foreach (var item in @Model.ProductList)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="/product/@item.ProductSlug" target="_blank">
+                                        <div class="nailthumb-container">
+                                            <img src="@item.ListImagePath" />
+                                        </div>
+                                    </a>
+                                </td>
+                                <td class="product-name">
+                                    <a href="/product/@item.ProductSlug" target="_blank">@item.ProductTitle</a>
+                                </td>
+                                <td class="product-price">
+                                    @item.Currency @item.PriceLow.ToString("0.00") - @item.PriceHigh.ToString("0.00")
+                                </td>
+                                <td>
+                                    @item.CreatedUser
+                                </td>
+                                <td class="product-stock-status">
+                                    <div class="switch float-right" onclick="ChangeStatus(this,@item.Id)" data-status="@item.StatusId" title="Active/Passive">
+                                        <input type="checkbox" @(item.StatusId == 3 ? "checked" : "" ) />
+                                        <span class="slider round"></span>
+                                    </div>
+                                </td>
+                                <td class="product-add-to-cart">
+                                    <a href="/companyadmin/product-edit/@Model.CompanyId/@item.Id" class="button add_to_cart_button button alt float-right"> Edit</a>
+                                </td>
+                                <td class="product-add-to-cart">
+                                    <a href="/companyadmin/copy-product/@Model.CompanyId/@item.Id/@item.CategoryId" class="button add_to_cart_button button alt float-right"> Copy</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div class="shop-control-bar-bottom">
+                <nav class="woocommerce-pagination">
+                    <cs-pager cs-paging-pagesize="25"
+                              cs-paging-pagenumber="@Model.PageNumber"
+                              cs-paging-totalitems="@Model.TotalCount"
+                              cs-pagenumber-param="page"
+                              cs-pager-ul-class="page-numbers"
+                              cs-pager-li-current-class="current"
+                              asp-route-name="@Model.SearchKey" ,
+                              asp-route-status="@Model.StatusId"
+                              asp-controller="CompanyAdmin"
+                              asp-action="Products"></cs-pager>
+                </nav>
+            </div>
+        </div>
+    </form>
+</div>
+
+

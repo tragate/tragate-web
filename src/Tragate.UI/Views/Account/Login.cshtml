@@ -1,0 +1,66 @@
+@model Tragate.UI.Models.User.LoginViewModel
+@{ 
+    ViewData["Title"] = "Login";
+    ViewData["Class"] = "Login";
+    Layout = "~/Views/NewShared/AccountLayout.cshtml"; 
+}
+<div class="u-full-width loginPage">
+    <div class="row">
+        <div class="four columns">
+            <div class="logo">
+                <a asp-action="Index" asp-controller="Home">
+                    <img src="~/Content/images/logo.png" />
+                </a>
+            </div>
+            <h1>Login</h1>
+            <div class="row social-btns t-center">
+                <div class="row">
+                    <div class="six columns"><div class="btn social-login facebook" onclick="$.FacebookLogin.Login();" data-toggle="tooltip" title="Login With Facebook"><i class="fab fa-facebook-f"></i> Login With Facebook</div></div>
+                    <div class="six columns"><div class="btn social-login google" data-toggle="tooltip" title="Login With Google"><img src="~/assets/images/google.png" />Login With Google</div></div>
+                </div>
+            </div>
+            <form class="ajax tragate inForm" method="post" action="/Account/Login" validate>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input name="email" type="email" placeholder="Email" required />
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input name="password" type="password" placeholder="Password" minlength="6" required>
+                </div>
+                <div class="form-group">
+                    <span>Forgot your password ?</span> <a class="underline link" href="/Account/ForgotPassword">Create new password</a>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn torquoise submit">Login</button>
+                </div>
+                <div class="form-group">
+                    <a class="btn yellow block" asp-action="SignUp" asp-controller="Account">Create a TraGate Account</a>
+                </div>
+            </form>
+            <div class="twelve columns signature">
+                <div class="u-pull-left">Copyright &copy; @DateTime.Now.Year <a asp-action="index" asp-controller="home">TraGate Bilgi Teknolojileri A.S.</a></div>
+                <div class="u-pull-right">
+                    Made with
+                    <i class="fa fa-heart"></i> in Istanbul, Turkey
+                </div>
+            </div>
+        </div>
+        <div class="eight columns">
+            <div class="text">
+                <h2 class="font-bold centered">Welcome to TraGate</h2>
+                <p>TraGate.com is the marketplace that only consists of qualified Turkish Exporters.</p>
+            </div>
+            <img src="~/Content/images/login-bg.jpg" />
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/AOBu2NbwTKc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+@section  Scripts{ 
+<script>
+    window.onload = function () {
+        $('.eight.columns img').height($('.loginPage').height());
+    }
+</script>
+}

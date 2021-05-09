@@ -1,0 +1,18 @@
+@model Tragate.UI.Models.Location.LocationViewModel
+@{ 
+    Random r = new Random();
+    int rInt = r.Next(0, 100);
+}
+<div class="form-group @Model.DivideClass">
+    <label class="black-label"><i class="fa fa-globe"></i> @Model.CountryName</label>
+    <select id="@("countries" + rInt)" class="ajax" name="CountryId" data-url="/common/location" data-current_val="@Model.CountryId" data-change_to="@("#states" + rInt)" data-val_name="name" required>
+        <option value="" selected>Select</option>
+    </select>
+</div>
+
+<div class="form-group @Model.DivideClass" id="state">
+    <label class="black-label"><i class="fa fa-map-marker"></i> @Model.StateName</label>
+    <select id="@("states" + rInt)" data-url="/common/location?parentId=" data-current_val="@Model.StateId" name="StateId" data-val_name="name" required>
+        <option value="" selected>Select</option>
+    </select>
+</div>

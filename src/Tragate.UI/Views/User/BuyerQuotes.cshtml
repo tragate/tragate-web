@@ -1,0 +1,177 @@
+@{ ViewData["Title"] = "User Quotes"; Layout = "~/Views/Shared/_UserLayout.cshtml"; }
+<div class="type-page hentry" ng-app="TragateUser" ng-controller="MainController">
+    <div ng-controller="BuyerController" ng-init="getBuyerQuotes(0,1)" class="ng-scope">
+        <header class="entry-header">
+            <div class="page-header-caption">
+                <h1 class="entry-title">Buy</h1>
+            </div>
+        </header>
+        <div class="entry-content">
+            <ul class="col-md-12 tab-buttons ng-hide">
+                <li ng-class="{'active': key == selectedTab}" ng-click="getBuyerQuotes(key,1)" data-target="#tab{{key}}" ng-repeat="(key,value) in Tabs">
+                    <a>{{value.name}}</a>
+                </li>
+            </ul>
+            <div class="col-md-12 tabs">
+                <div class="content" ng-class="{'active': key == selectedTab}" id="tab{{key}}" ng-repeat="(key,value) in Tabs">
+                    <div class="ng-hide" ng-show="!loading">
+                        <div class="alert alert-info" style="font-weight:500" role="alert" ng-bind="value.desc"></div>
+                        <table class="table table-responsive" style="display:table" ng-if="buyerQuotes[key].quotationUserBuyerList.length > 0">
+                            <tr>
+                                <th>Id</th>
+                                <th>Image</th>
+                                <th>Seller Company</th>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Last Activity</th>
+                                <th></th>
+                            </tr>
+                            <tr ng-repeat="row in buyerQuotes[key].quotationUserBuyerList" ng-class="{'bg-faded' : row.buyerContactStatusId != diffirentRow }">
+                                <td>{{row.id}}</td>
+                                <td><img ng-src="{{row.sellerCompanyProfileImage}}" style="max-width: 60px;max-height: 60px;"></td>
+                                <td>
+                                    {{row.sellerCompany}}<br />
+                                    {{row.sellerUser}}<br />
+                                    {{row.sellerContactStatus}}
+                                </td>
+                                <td>{{row.title}}</td>
+                                <td>{{row.orderStatus}}</td>
+                                <td>{{row.updatedDate | date:'dd MMMM yyyy hh:mm'}}</td>
+                                <td><button type="button" class="btn btn-primary" ng-click="OpenBuyerModal(row)">View</button></td>
+                            </tr>
+                        </table>
+                        <div class="text-center h4" ng-if="buyerQuotes[key].quotationUserBuyerList.length == 0"> No Data </div>
+                        <div class="shop-control-bar-bottom">
+                            <nav class="woocommerce-pagination">
+                                <ul class="page-numbers">
+                                    <li ng-click="getBuyerQuotes(key,value)" ng-class="{'current': value == buyerQuotes[key].CurrentPage}" ng-repeat="value in buyerQuotes[key].Paging">
+                                        <span>{{value}}</span>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="loading ng-show" ng-show="loading"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade QuoteModal" id="BuyerModal" role="dialog" >
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" ng-bind="Popup.Config.Title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="col-md-12">
+                                            <div class="row" style="border-top:1px solid rgba(0,0,0,.125)">
+                                                <div class="col-md-6">
+                                                    <table class="table-sm">
+                                                        <tr><th>Buyer</th></tr>
+                                                        <tr><td ng-bind="Popup.buyerUserFullName"></td></tr>
+                                                        <tr><td ng-bind="Popup.buyerUserEmail"></td></tr>
+                                                        <tr><td ng-bind="Popup.buyerContactStatus"></td></tr>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table-sm">
+                                                        <tr><th>Seller</th></tr>
+                                                        <tr><td ng-bind="Popup.sellerCompanyName"></td></tr>
+                                                        <tr><td ng-bind="Popup.sellerUserFullName"></td></tr>
+                                                        <tr><td ng-bind="Popup.sellerContactStatus"></td></tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="border-top:1px solid rgba(0,0,0,.125)">
+                                                <div class="col-md-12">
+                                                    <table class="table-sm">
+                                                        <tr><th>Products</th></tr>
+                                                        <tr>
+                                                            <th>Image</th>
+                                                            <th>Title</th>
+                                                        </tr>
+                                                        <tr ng-repeat="Product in Popup.Products">
+                                                            <td>
+                                                                <img ng-src="{{Product.productListImagePath}}" style="max-height: 50px;" />
+
+                                                            </td>
+                                                            <td ng-bind="Product.productTitle"></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="border-top:1px solid rgba(0,0,0,.125)">
+                                                <div class="col-md-12">
+                                                    <table class="table-sm">
+                                                        <tr>
+                                                            <td>Quotation Id</td>
+                                                            <td>:</td>
+                                                            <td ng-bind="Popup.id"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Title</td>
+                                                            <td>:</td>
+                                                            <td ng-bind="Popup.title"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Status</td>
+                                                            <td>:</td>
+                                                            <td ng-bind="Popup.orderStatus"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Created Date</td>
+                                                            <td>:</td>
+                                                            <td ng-bind="Popup.createdDate | date:'dd MMMM yyyy hh:mm'"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Last Activity</td>
+                                                            <td>:</td>
+                                                            <td ng-bind="Popup.updatedDate | date:'dd MMMM yyyy hh:mm'"></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="chat">
+                                    <div class="messages col-md-12">
+                                        <div class="row" ng-repeat="Message in Popup.History">
+                                            <div class="message" ng-class="{'send' : Popup.buyerUserId == Message.createdUserId,'come' : Popup.buyerUserId != Message.createdUserId}">
+                                                <div class="img_wrapper">
+                                                    <img ng-src="{{Message.profileImagePath}}" />
+                                                </div>
+                                                <div class="desc">
+                                                    <div class="user">{{Message.createdUser}} - {{Message.createdDate | date:'dd MMM yyyy hh:mm'}}</div>
+                                                    <div style="white-space: pre-wrap;" ng-bind-html="Message.description"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <textarea ng-model="NewDescription" class="form-control" required></textarea>
+                                        <button type="button" class="button btn-primary pull-right" ng-click="sendDescription(Popup.id)" style="margin-top:10px;">Send</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="/assets/js/angular.min.js" asp-append-version="true" defer></script>
+    <script src="/assets/js/angular-sanitize.min.js" asp-append-version="true" defer></script>
+    <script src="/assets/js/underscore-min.js" asp-append-version="true" defer></script>
+    <script src="/assets/js/user/app.js" asp-append-version="true" defer></script>
+}

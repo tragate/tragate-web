@@ -1,0 +1,16 @@
+.nailthumb-container{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.nailthumb-container img{
+    max-width:none;
+}
+@media (max-width: 450px) {
+   .nailthumb-container{
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+    } 
+}

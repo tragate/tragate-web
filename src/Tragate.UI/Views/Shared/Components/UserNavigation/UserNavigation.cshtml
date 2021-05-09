@@ -1,0 +1,53 @@
+<div id="secondary" class="widget-area shop-sidebar" role="complementary">
+    <div class="widget woocommerce widget_product_categories techmarket_widget_product_categories" id="techmarket_product_categories_widget-2">
+        <ul class="product-categories ">
+            <li class="product_cat">
+                <span>@ViewBag.UserName</span>
+                <ul>
+                    <li class="cat-item">
+                        <a asp-action="index" asp-controller="user">
+                            <span class="child-indicator">
+                                <i class="fa fa-th-large"></i>
+                            </span>Home
+                        </a>
+                    </li>
+                    <li class="cat-item">
+                        <a asp-action="buyer-quotes" asp-controller="user">
+                            <span class="child-indicator">
+                                <i class="fa fa-cubes"></i>
+                            </span>Buy
+                        </a>
+                    </li>
+                    <li class="cat-item">
+                        <a asp-action="seller-quotes" asp-controller="user">
+                            <span class="child-indicator">
+                                <i class="fa fa-money"></i>
+                            </span>Sell
+                        </a>
+                    </li>
+                    <li class="cat-item">
+                        <a asp-action="company" asp-controller="user">
+                            <span class="child-indicator">
+                                <i class="fa fa-building-o"></i>
+                            </span>Company
+                        </a>
+                    </li>
+                    <li class="cat-item">
+                        <a asp-action="settings" asp-controller="user">
+                            <span class="child-indicator">
+                                <i class="fa fa-cogs"></i>
+                            </span>Settings
+                        </a>
+                    </li>
+                    <li class="cat-item">
+                        <a asp-action="logout" asp-controller="account">
+                            <span class="child-indicator">
+                                <i class="fa fa-power-off"></i>
+                            </span>Log Out
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

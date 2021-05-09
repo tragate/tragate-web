@@ -1,0 +1,68 @@
+﻿@{ 
+    ViewData["Title"] = "Trade Gate of Turkey";
+    Layout = "~/Views/NewShared/HomeLayout.cshtml"; 
+}
+
+<div class="u-full-width main-container">
+    <div class="container">
+        <div class="seven columns banner offset-by-three">
+            <div class="twelve columns">
+                <div class="row">
+                    <img src="~/Content/images/discover-turkey-logo.png" alt="Trade Gate of Turkey">
+                </div>
+                <div class="row">
+                    <h1>Trade Gate of Turkey</h1>
+                    <h2>
+                        We have made finding “the right supplier” from Turkey incredibly easy!
+                    </h2>
+                </div>
+            </div>
+            <div class="twelve columns buttons">
+                <div class="btn border">
+                    <i class="fas fa-award"></i>
+                    <div class="title">Reliable</div>
+                    <div class="text">
+                        We only accept qualified companies
+                    </div>
+                </div>
+                <div class="btn border">
+                    <i class="fas fa-check"></i>
+                    <div class="title">Verified</div>
+                    <div class="text">
+                        We verify and update all company data
+                    </div>
+                </div>
+                <div class="btn border">
+                    <i class="fas fa-chalkboard"></i>
+                    <div class="title">Easy</div>
+                    <div class="text">
+                        We offer a very clean user experience
+                    </div>
+                </div>
+                <div class="btn border">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <div class="title">Responsive</div>
+                    <div class="text">
+                        We ensure you that you will get a response
+                    </div>
+                </div>
+            </div>
+            <a href="/content/what-is-tragate" class="btn arrow torquoise">Learn More <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+        <div class="two columns mottos">
+            <img src="~/Content/images/turkiye-logo.png"/>
+            <b>TraGate</b> seçkin ihracatçıların bir araya geldiği, Türkiye’nin ihracata yönelik en kapsamlı pazaryeri.<br/>
+            <a  href="https://tragate.com/turkiye" target="_blank" class="btn red"> Bilgi Al <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+    </div>
+</div>
+
+<cache expires-after="@TimeSpan.FromHours(1)">
+    @await Component.InvokeAsync("SubCategoryGroup", new { view = "New" })
+</cache>
+
+
+@if (!User.Identity.IsAuthenticated)
+{
+    //Login Banner
+}

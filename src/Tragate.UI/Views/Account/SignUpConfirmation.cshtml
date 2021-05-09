@@ -1,0 +1,33 @@
+        <div class="twelve columns">
+            <h1>Sign Up and Join Free Now!</h1>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="step s1 active">
+                    <div class="icon"><i class="fa fa-user"></i></div>
+                    <div class="text">Personal Info</div>
+                </div>
+                <div class="step s2 active">
+                    <div class="icon"><i class="fa fa-check-circle"></i></div>
+                    <div class="text">Verification</div>
+                </div>
+                <div class="step s3">
+                    <div class="icon"><i class="fa fa-building"></i></div>
+                    <div class="text">Company Info</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="verifiedForm" class="eight columns offset-by-two t-center">
+            <div class="form-group" style="text-align: center">
+                <div class="alert alert-success">
+                    <i class="fa fa-check-circle fa-5x" style="color:green;"></i>
+                    <br/>
+                    <h3 style="font-weight:500;">You have signed up successfully</h3>
+                    <p>To verify your account, please click the activation link that's been sent to your inbox.</p>
+                </div>
+                <form class="ajax tragate inForm" asp-controller="Account" asp-action="SendEmailVerifyAgain" method="post" validate>
+                    <input type="hidden" name="email" id="email" value="@TempData["email"]" />
+                    <button type="button" class="btn torquoise submit">Send Verification E-mail Again</button>
+                </form>
+            </div>
+        </div>

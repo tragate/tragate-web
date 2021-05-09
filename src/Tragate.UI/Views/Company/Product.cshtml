@@ -1,0 +1,43 @@
+@model Tragate.UI.Models.Product.ProductDetailViewModel
+@{ ViewData["Title"] = @Model.ProductTitle + " / Product Info";
+    ViewData["Description"] = @Model.ProductTitle + " / Product Info, description, price, shipping information, packaging information, products, contact information, email, address, phone, website, " + @Model.CompanyTitle;
+    Layout = "~/Views/Shared/_CompanyLayout.cshtml"; }
+@section Styles{
+    <link href="~/assets/css/jquery.fancybox.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/assets/js/jquery.fancybox.min.js" asp-append-version="true" defer></script>
+    <script src="~/assets/js/custom-js/js/zoom.js" asp-append-version="true" defer></script>
+    <script>
+        window.onload = function () {
+            $('.img_wrapper [data-slick]').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear',
+                arrows: false,
+                adaptiveHeight: false
+            });
+        }
+    </script>
+}
+<nav class="woocommerce-breadcrumb">
+    <span class="delimiter">
+        <i class="fa fa-home"></i>
+    </span>
+    <a asp-action="index" asp-controller="home">TraGate</a>
+    <span class="delimiter">
+        <i class="tm tm-breadcrumbs-arrow-right"></i>
+    </span>
+    <a asp-action="home" asp-controller="company" asp-route-slug="@Model.Slug">@Model.CompanyTitle</a>
+    <span class="delimiter">
+        <i class="tm tm-breadcrumbs-arrow-right"></i>
+    </span>
+    <a asp-action="products" asp-controller="company" asp-route-slug="@Model.Slug">Products</a>
+    <span class="delimiter">
+        <i class="tm tm-breadcrumbs-arrow-right"></i>
+    </span>
+    @Model.ProductTitle
+</nav>
+@await Component.InvokeAsync("CompanyProduct", new { model = @Model })

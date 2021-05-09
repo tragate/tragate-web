@@ -1,0 +1,85 @@
+@model Tragate.UI.Models.Company.CompanyViewModel
+@{
+    ViewData["Title"] = "Verify Account";
+    ViewData["Class"] = "SingUp";
+    Layout = "~/Views/NewShared/AccountLayout.cshtml";
+}
+<div class="u-full-width ForgotPage">
+    <div class="container">
+        <div class="twelve columns">
+            <h1>Sign Up and Join Free Now!</h1>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="step s1 active">
+                    <div class="icon"><i class="fa fa-user"></i></div>
+                    <div class="text">Personal Info</div>
+                </div>
+                <div class="step s2 active">
+                    <div class="icon"><i class="fa fa-check-circle"></i></div>
+                    <div class="text">Verification</div>
+                </div>
+                <div class="step s3">
+                    <div class="icon"><i class="fa fa-building"></i></div>
+                    <div class="text">Company Info</div>
+                </div>
+            </div>
+        </div>
+        <div id="verifiedForm" class="twelve columns t-center">
+            <div class="form-group" style="text-align: center">
+                <div class="alert alert-success">
+                    <i class="fa fa-check-circle fa-5x" style="color:green"></i> <br /><br />
+                    <label>Congrats, your email has been verified. Complete setup below.</label>
+                </div>
+                <div class="alert alert-warning">
+                    <label>Note: We only allow seller companies from Turkey to verify and update company data regularly.</label>
+                </div>
+            </div>
+            <input type="hidden" id="personId" asp-for="PersonId" />
+            <div class="form-group userTypeCard">
+                <label class="radio i-checks" for="UserType1">
+                    <i class="far fa-user"></i>
+                    <label class="text">I want to use TraGate personally</label>
+                    <input type="radio" value="1" name="choice" id="UserType1">
+                </label>
+                <label class="radio i-checks active" for="UserType2">
+                    <i class="far fa-building"></i>
+                    <label class="text">I am a seller from Turkey</label>
+                    <input type="radio" checked="" value="2" name="choice" id="UserType2">
+                </label>
+            </div>
+            <div class="form-group">
+                <div class="btn torquoise u-full-width" id="btnContinue" type="button">Continue</div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{ 
+    <script>
+        window.onload = function () {
+            $('.userTypeCard .i-checks').click(function () {
+                $('.userTypeCard .i-checks').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            $("#btnContinue").on("click", function (e) {
+                e.preventDefault();
+                var choice = parseInt($('input[name=choice]:checked').val());
+                var personId = $("#personId").val();
+
+                switch (choice) {
+                    case 1:
+                        window.location.href = "/User";
+                        break;
+                    case 2:
+                        window.location.href = "/Company/Register";
+                        break;
+                    case 3:
+                        window.location.href = "/User";
+                        break;
+                    default:
+                        return false;
+                }
+            });
+        };
+    </script>
+}

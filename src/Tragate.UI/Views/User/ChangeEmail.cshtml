@@ -1,0 +1,59 @@
+﻿@model Tragate.UI.Models.User.ChangeEmailViewModel
+@{
+    ViewData["Title"] = "ChangeEmail";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<style>
+    .errors {
+        color: red !important;
+    }
+</style>
+<div class="type-page hentry">
+    <header class="entry-header">
+        <div class="page-header-caption">
+            <h1 class="entry-title">Change Email</h1>
+        </div>
+    </header>
+    <div class="entry-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tm-shop-attributes-detail like-column columns-3">
+
+                    @if (ViewBag.Errors != null)
+                    {
+                        foreach (var item in ViewBag.Errors)
+                        {
+                            <p class="errors"> @item </p>
+                        }
+                    }
+                    <form asp-action="ChangeEmail" class="wpcf7-form">
+                        <div id="Email">
+                            <div class="form-group">
+                                <label>New Email</label>
+                                <input type="email" name="NewEmail" id="NewEmail" class="form-control" required />
+                            </div>
+                            <div class="form-group clearfix">
+                                <p>
+                                    <input type="button" value="Change Email" class="wpcf7-form-control wpcf7-submit"onclick="if ($('#NewEmail').valid() == true ) {$('#Email').slideUp(); $('#Password').slideDown();}"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div id="Password" style="display:none;">
+                            <div class="form-group">
+                                <label>Password</label>
+                                <input type="password" name="Password" class="form-control" required />
+                            </div>
+                            <div class="form-group clearfix">
+                                <p>
+                                    <input type="submit" value="Save" onclick="$('.wpcf7-form').validate();" class="wpcf7-form-control wpcf7-submit" />
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

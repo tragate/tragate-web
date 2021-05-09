@@ -1,0 +1,227 @@
+@model Tragate.UI.Models.Company.CompanyHeaderViewModel
+<header id="masthead" class="site-header header-v5" style="background-image: none; ">
+    <div class="col-full desktop-only">
+        <div class="row">
+            <div class="site-branding">
+                <a asp-action="index" asp-controller="home" class="custom-logo-link" rel="home">
+                    <img src="~/assets/images/logo-t-w.png" style="height: 40px;">
+                </a>
+            </div>
+            <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation" data-nav="flex-menu">
+                <ul id="menu-primary-menu" class="nav yamm">
+                    @Html.Partial("_TragateContent")
+                </ul>
+            </nav>
+            @await Component.InvokeAsync("LoginStatus")
+        </div>
+    </div>
+</header>
+<header id="masthead" class="site-header header-v7" style="background-image: none; ">
+    <div class="col-full desktop-only">
+        <div class="techmarket-sticky-wrap">
+            <div class="row">
+                <nav id="primary-navigation" class="primary-navigation" aria-label="Primary Navigation" data-nav="flex-menu">
+                    <ul id="menu-primary-menu" class="nav yamm">
+                        <li class="menu-item animate-dropdown">
+                            <a asp-action="home" asp-controller="company" asp-route-slug="@Model.Slug">
+                                <i class="fa fa-home"></i> Home
+                            </a>
+                        </li>
+                        <li class="menu-item animate-dropdown">
+                            <a asp-action="about" asp-controller="company" asp-route-slug="@Model.Slug">
+                                <i class="fa fa-bank"></i> About
+                            </a>
+                        </li>
+                        <li class="menu-item animate-dropdown">
+                            <a asp-action="products" asp-controller="company" asp-route-slug="@Model.Slug">
+                                <i class="fa fa-cubes"></i> Products
+                            </a>
+                        </li>
+                        <li class="menu-item animate-dropdown">
+                            <a asp-action="contact" asp-controller="company" asp-route-slug="@Model.Slug">
+                                <i class="fa fa-phone"></i> Contact
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="site-branding">
+                    <a asp-action="home" asp-controller="company" asp-route-slug="@Model.Slug" class="custom-logo-link">
+                        <img class="wp-post-image" src="@Model.ProfileImagePath" style="height: 80px;" />
+                    </a>
+                </div>
+                <ul class="header-compare nav navbar-nav">
+                    <li class="nav-item">
+                        @if (Model.MembershipTypeId == 0)
+                        {
+                            <i class="fa fa-bookmark-o"></i>
+                            <span id="top-cart-compare-count" class="value">@Model.MembershipType</span>
+                        }
+                        else
+                        {
+                            <img src="~/assets/images/tragate-gold-company-icon.png" style="float: left; width: 25px; height: 25px;" />
+                            <span id="top-cart-compare-count" style="color:gold" class="value">@Model.MembershipType</span>
+
+                        }
+                    </li>
+                </ul>
+                <ul class="header-wishlist nav navbar-nav">
+                    <li class="nav-item">
+                        @if (Model.VerificationTypeId == 0)
+                        {
+                            <i class="fa fa-circle-o"></i>
+                            <span id="top-cart-wishlist-count" class="value">@Model.VerificationType</span> }
+                        else
+                        {
+                            <i class="fa fa-check-circle-o" style="color:#34afcb"></i>
+                            <span id="top-cart-wishlist-count" style="color:#34afcb" class="value">@Model.VerificationType</span>
+
+                        }
+                    </li>
+                </ul>
+                @if (Model.IsAdmin)
+                {
+                    <ul class="header-compare nav navbar-nav">
+                        <li class="nav-item">
+                            <a asp-action="index" asp-controller="companyadmin" asp-route-id="@Model.CompanyId" class="nav-link">
+                                <i class="fa fa-cogs"></i>
+                            </a>
+                        </li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-full handheld-only">
+        <div class="handheld-header">
+            <div class="row">
+                <div class="site-branding">
+                </div>
+            </div>
+            <div class="techmarket-sticky-wrap">
+                <div class="row">
+                    <nav id="handheld-navigation" class="handheld-navigation" aria-label="Handheld Navigation">
+                        <button class="btn navbar-toggler" type="button">
+                            <i class="tm tm-departments-thin"></i>
+                            <span>Menu</span>
+                        </button>
+                        <div class="handheld-navigation-menu">
+                            <span class="tmhm-close">Close</span>
+                            <ul id="menu-departments-menu-1" class="nav">
+                                <li class="menu-item animate-dropdown" style="border-bottom: 1px solid silver;">
+                                    <a>@Model.Name</a>
+                                </li>
+                                <li class="menu-item animate-dropdown">
+                                    <a asp-action="home" asp-controller="company" asp-route-slug="@Model.Slug">
+                                        <i class="fa fa-home"></i> Home
+                                    </a>
+                                </li>
+                                <li class="menu-item animate-dropdown">
+                                    <a asp-action="about" asp-controller="company" asp-route-slug="@Model.Slug">
+                                        <i class="fa fa-bank"></i> About
+                                    </a>
+                                </li>
+                                <li class="menu-item animate-dropdown">
+                                    <a asp-action="products" asp-controller="company" asp-route-slug="@Model.Slug">
+                                        <i class="fa fa-cubes"></i> Products
+                                    </a>
+                                </li>
+                                <li class="menu-item animate-dropdown" style="border-bottom: 1px solid silver;">
+                                    <a asp-action="contact" asp-controller="company" asp-route-slug="@Model.Slug">
+                                        <i class="fa fa-phone"></i> Contact
+                                    </a>
+                                </li>
+                                @if (Model.IsAdmin)
+                                {
+                                    <li class="yamm-tfw menu-item menu-item-has-children animate-dropdown dropdown-submenu" style="border-bottom: 1px solid silver;">
+                                        <a title="Computers &amp; Laptops" data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" href="#">
+                                            <i class="fa fa-cogs"></i> Manage Company <span class="caret"></span>
+                                        </a>
+                                        <ul role="menu" class=" dropdown-menu">
+                                            <li class="menu-item menu-item-object-static_block animate-dropdown">
+                                                <div class="yamm-content">
+                                                    <div class="row yamm-content-row">
+                                                        <div class="col-sm-12">
+                                                            <div class="kc-col-container">
+                                                                <div class="kc_text_block">
+                                                                    <ul>
+                                                                        <li>
+                                                                            <a asp-action="index" asp-controller="companyadmin" asp-route-id="@Model.CompanyId">
+                                                                                <span class="child-indicator">
+                                                                                    <i class="fa fa-th-large"></i>
+                                                                                </span>Home
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a asp-action="messages" asp-controller="companyadmin" asp-route-id="@Model.CompanyId">
+                                                                                <span class="child-indicator">
+                                                                                    <i class="fa fa-envelope-o"></i>
+                                                                                </span>Messages
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a asp-action="buyer-quotes" asp-controller="companyadmin" asp-route-id="@Model.CompanyId">
+                                                                                <span class="child-indicator">
+                                                                                    <i class="fa fa-cubes"></i>
+                                                                                </span>Buy
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a asp-action="seller-quotes" asp-controller="companyadmin" asp-route-id="@Model.CompanyId">
+                                                                                <span class="child-indicator">
+                                                                                    <i class="fa fa-money"></i>
+                                                                                </span>Sell
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a asp-action="products" asp-controller="companyadmin" asp-route-id="@Model.CompanyId">
+                                                                                <span class="child-indicator">
+                                                                                    <i class="fa fa-cubes"></i>
+                                                                                </span>Products
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a asp-action="admins" asp-controller="companyadmin" asp-route-id="@Model.CompanyId">
+                                                                                <span class="child-indicator">
+                                                                                    <i class="fa fa-users"></i>
+                                                                                </span>Admins
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            <a asp-action="settings" asp-controller="companyadmin" asp-route-id="@Model.CompanyId">
+                                                                                <span class="child-indicator">
+                                                                                    <i class="fa fa-cogs"></i>
+                                                                                </span>Settings
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                } @await Component.InvokeAsync("LoginStatusMobile")
+                                @Html.Partial("_TragateContentMobile")
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="site-search">
+                        <div class="widget woocommerce widget_product_search">
+                            <form role="search" method="get" class="woocommerce-product-search" asp-action="search" asp-controller="search">
+                                <label class="screen-reader-text" for="woocommerce-product-search-field-0">Search for:</label>
+                                <input type="search" name="key" class="search-field" placeholder="Search products" value="" />
+                                <input type="submit" value="Search" />
+                                <input type="hidden" name="searchTypeId" value="0" />
+                            </form>
+                        </div>
+                    </div>
+                    <a class="handheld-header-cart-link has-icon" asp-action="index" asp-controller="user">
+                        <i class="tm tm-login-register"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

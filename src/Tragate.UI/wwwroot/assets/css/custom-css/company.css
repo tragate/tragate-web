@@ -1,0 +1,77 @@
+.primary-navigation .nav, .navbar-primary .nav{
+    margin: 0;
+}
+.site-header.header-v5{
+    margin: 0;
+    padding: 0.3em 0;
+}
+.site-header.header-v7, .site-header.header-v7 .sticky-wrapper .techmarket-sticky-wrap.stuck > .row{
+    padding: 0.3em;
+}
+.site-header.header-v5 .primary-navigation .nav > li > a, .header-v5 .header-compare a{
+    color: #e7e7e7;
+    text-transform: none;
+}
+.site-header.header-v5 .primary-navigation .nav > li > a:hover, .header-v5 .header-compare a:hover{
+    color: #fff;
+}
+@media (min-width: 1200px){
+    .site-header.header-v5 .primary-navigation{
+        flex: 0 0 58%;
+        max-width: 58%;
+    }
+}
+@media (min-width: 992px) {
+    @media (max-width: 1199px){
+        .site-header.header-v5 .primary-navigation{
+            flex: 0 0 52%;
+            max-width: 52%;
+        }
+    }
+}
+@media (min-width: 1200px){
+    .site-header.header-v7 .primary-navigation {
+        flex: 0 0 45%;
+        max-width: 45%;
+    }
+}
+@media (min-width: 992px) {
+    @media (max-width: 1199px){
+        .site-header.header-v7 .primary-navigation {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+    }
+}
+ul.header-compare.nav, ul.header-wishlist.nav{
+    margin-bottom: 0;
+}
+.section-recent-posts-with-categories{
+    padding: 0;
+}
+.section-recent-posts-with-categories{
+    margin: 0.5em 0 0 0;
+    text-align: center;
+    width: 100%;
+}
+.section-recent-posts-with-categories .section-title{
+    color: #c0c0c0;
+    font-size: 2.2em;
+}
+.pace .pace-progress{
+    background-color: #fff;
+}
+@media (min-width: 1023px) {
+    @media (max-width: 1368px){
+        .two-sidebar #content #primary {
+            flex: 0 0 78.3333333333%;
+            max-width: 78.3333333333%;
+            order: 2;
+        }
+    }
+}
+.k-state-selected, .k-state-focused, .k-list>.k-state-focused.k-state-selected,.k-list>.k-state-selected{
+        background: #34afcb;
+        border-color: #34afcb;
+        box-shadow:none;
+}

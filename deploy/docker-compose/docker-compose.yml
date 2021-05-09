@@ -1,0 +1,84 @@
+version: '3'
+
+services:
+  dashboard:
+    image: portainer/portainer
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == manager]
+    ports:
+      - "9000:9000"
+
+  web_1:
+    image: ninjafx/tragate-web:latest
+    environment:
+      - ASPNETCORE_URLS=http://*:5001
+      - X_BACKEND_SERVER=SRV01
+    depends_on:
+      - api
+      - redis
+  
+  web_2:
+    image: ninjafx/tragate-web:latest
+    environment:
+      - ASPNETCORE_URLS=http://*:5001
+      - X_BACKEND_SERVER=SRV02
+    depends_on:
+      - api
+      - redis
+      
+  web_3:
+    image: ninjafx/tragate-web:latest
+    environment:
+      - ASPNETCORE_URLS=http://*:5001
+      - X_BACKEND_SERVER=SRV03
+    depends_on:
+      - api
+      - redis   
+
+  proxy:
+    image: ninjafx/proxy
+    ports:
+      - '8080:8080'
+    depends_on:
+      - web_1
+      - web_2
+      - web_3
+
+  api:
+    image: ninjafx/tragate-api:latest
+    ports:
+      - "5002:5002"
+    depends_on:
+      - db
+      - elk
+
+  db:
+    image: ninjafx/tragate-db:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      placement:
+        constraints: [node.role == manager]
+    environment:
+      ACCEPT_EULA: 'Y'
+      SA_PASSWORD: testuser123!
+    ports:
+      - "1433:1433"
+  
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+
+  elk:
+    image: nshou/elasticsearch-kibana
+    ports:
+      - 9200:9200
+      - 5601:5601

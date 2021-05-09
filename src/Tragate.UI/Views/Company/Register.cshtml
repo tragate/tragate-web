@@ -1,0 +1,116 @@
+﻿@model Tragate.UI.Models.Company.CompanyViewModel
+@{
+    ViewData["Title"] = "Company Register Page";
+    ViewData["Class"] = "SingUp";
+    Layout = "~/Views/NewShared/AccountLayout.cshtml";
+}
+<div class="u-full-width ForgotPage">
+    <div class="container">
+        <div class="twelve columns">
+            <h1>Sign Up and Join Free Now!</h1>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="step s1 active">
+                    <div class="icon"><i class="fa fa-user"></i></div>
+                    <div class="text">Personal Info</div>
+                </div>
+                <div class="step s2 active">
+                    <div class="icon"><i class="fa fa-check-circle"></i></div>
+                    <div class="text">Verification</div>
+                </div>
+                <div class="step s3 active">
+                    <div class="icon"><i class="fa fa-building"></i></div>
+                    <div class="text">Register Company</div>
+                </div>
+            </div>
+        </div>
+        @if (Context.User.Claims.Where(x => x.Type == "EmailVerified").FirstOrDefault().Value == "True")
+        {
+            <input type="hidden" asp-for="CountryId">
+            <input type="hidden" asp-for="StateId">
+            <form class="ajax tragate inForm ten columns offset-by-one" data-event="CompanyRegister" asp-controller="Company" asp-action="Register" validate>
+                <div class="form-group">
+                    <label><i class="fa fa-building"></i> Company Name</label>
+                    <input name="FullName" type="text" placeholder="Company Name" minlength="4" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fa fa-list-alt"></i> Categories</label>
+                    <select id="CategoryIdString" class="ajax" name="CategoryIdString" data-url="/category/get-categories" required>
+                        <option value="" selected>Select</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="BusinessType"><i class="fa fa-tags"></i> Business Type</label>
+                    <select id="BusinessType" class="ajax" name="BusinessType" data-url="/common/parameter/BusinessTypeId" required>
+                        <option value="" selected>Select</option>
+                    </select>
+                </div>
+
+                @await Component.InvokeAsync("Location", new { countryId = @Model.CountryId, stateId = @Model.StateId })
+
+                <div class="form-group">
+                    <label> <i class="fa fa-envelope"></i> Company Email</label>
+                    <input type="email" name="CompanyEmail" id="CompanyEmail" required placeholder="Company Email" />
+                </div>
+
+                <div class="form-group">
+                    <label> <i class="fa fa-phone"></i> Company Phone</label>
+                    <input type="tel" name="CompanyPhone" id="CompanyPhone" required placeholder="+90.........." value="+90" />
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="mcheckbox" style="display:inline-block;">
+                            <input type="checkbox" name="CompanyPolicyCheckBox" id="CompanyPolicyCheckBox" value="false" checked required>
+                            <label for="CompanyPolicyCheckBox"></label>
+                        </div>
+                        <label for="UserTermCheckBox" style="display:inline-block;">
+                            I accept TraGate
+                            <span class="ShowTrageteModal" data-url="/content/company-policy/json" style="text-decoration:underline;">
+                                Company Policy
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group t-center">
+                    <button class="btn torquoise submit block" type="button">Register Company</button>
+                </div>
+            </form>
+        }
+        else
+        {
+            <div id="verifiedForm" class="eight columns offset-by-two t-center">
+                <div class="form-group" style="text-align: center">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-circle fa-5x" style="color:#FF830A;"></i>
+                        <br />
+                        <h3 style="font-weight:500;">Your account is not verified</h3>
+                        <p>Please verify your account to register your company. Click the button below to get verification e-mail.</p>
+                    </div>
+                    <form class="ajax tragate inForm" asp-controller="Account" asp-action="SendEmailVerifyAgain" method="post" validate>
+                        <input type="hidden" name="email" id="email" value="@Model.UserEmail" />
+                        <button type="button" class="btn torquoise submit">Send Verification E-mail Again</button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Scripts{
+    <script>
+        window.onload = function () {
+            setTimeout(function () {
+                $('select[name=CountryId] option[value=1]').attr('selected', true);
+                $('select[name=CountryId] option').not('[value=1]').remove();
+                $('select[name=CountryId]').change();
+            }, 150);
+        }
+    </script>
+}
+
+
+
+

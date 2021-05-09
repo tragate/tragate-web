@@ -1,0 +1,21 @@
+.hentry .entry-header {
+    padding: 10px 0 10px 0;
+    width: 100%;
+}
+.hentry .entry-header .entry-title{
+    margin-bottom:0;
+}
+@media (min-width: 1023px) {
+    @media (max-width: 1368px) {
+        .two-sidebar #content #primary {
+            flex: 0 0 78.3333333333%;
+            max-width: 78.3333333333%;
+            order: 2;
+        }
+    }
+}
+@media (min-width: 1200px) {
+    .products:not(.slick-slider) .product{
+        margin: 0 0.5em;
+    }
+}

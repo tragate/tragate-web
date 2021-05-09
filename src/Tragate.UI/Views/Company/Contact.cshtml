@@ -1,0 +1,85 @@
+@model Tragate.UI.Models.Company.CompanyProfileViewModel
+@{ ViewData["Title"] = @Model.Name + " / Contact Information";
+    ViewData["Description"] = @Model.Name + " products, contact information, email, address, phone, website";
+    Layout = "~/Views/Shared/_CompanyLayout.cshtml"; }
+<style>
+    .tab-content {
+        padding: 10px;
+        min-height: 300px;
+    }
+
+    .profileImage {
+        max-height: 250px;
+        max-width: 280px;
+    }
+
+        .profileImage img {
+            width: 100%;
+        }
+
+    .company-details {
+        min-height: 400px;
+    }
+
+    .list-card-title label {
+        margin-bottom: 0;
+        font-weight: 500;
+        margin-right: 15px;
+    }
+
+    .bg-light {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        float: left;
+        margin: 30px;
+    }
+</style>
+<nav class="woocommerce-breadcrumb">
+    <span class="delimiter"><i class="fa fa-home"></i></span>
+    <a asp-action="index" asp-controller="home">TraGate</a>
+    <span class="delimiter"><i class="tm tm-breadcrumbs-arrow-right"></i></span>
+    <a asp-action="home" asp-controller="company">@Model.Name</a>
+    <span class="delimiter"><i class="tm tm-breadcrumbs-arrow-right"></i></span> Contact
+</nav>
+
+<section class="section-recent-posts-with-categories">
+    <div class="center-block">
+        <h1 class="section-title">@Model.Name / Contact Information</h1>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="basic-tab">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-3 profileImage">
+                            <img src="@Model.ProfileImagePath" id="pp" />
+                        </div>
+                        <div class="col-sm-9 company-details">
+                            <div class="card" style="width: 100%;">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="Name"></label></div>
+                                        <div class="card-text">@Model.Name </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="Location"></label></div>
+                                        <div class="card-text">@Model.Location </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="Website"></label></div>
+                                        <div class="card-text">@Model.Website </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="list-card-title"><label asp-for="Address"></label></div>
+                                        <div class="card-text">@Model.Address </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <br />
+                            <a class="button product_type_simple add_to_cart_button ContactSupplier" data-company-id="@Model.CompanyId">Contact Supplier</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@Html.Partial("_ContactSupplier")

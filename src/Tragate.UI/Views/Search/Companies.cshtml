@@ -1,0 +1,140 @@
+@model Tragate.UI.Models.Company.CompanyPageViewModel
+@{
+    ViewData["Title"] = Model.Category + " exporter companies in Turkey";
+    ViewData["Description"] = "Discover " + Model.Category + " exporter companies in Turkey. Top selected Turkish manufacturers are listed here. Discover the potential of Turkey with Tragate.";
+    Layout = "~/Views/NewShared/HomeLayout.cshtml";
+}
+
+<div class="u-full-width breadcrumbs">
+    <div class="container">
+        <div class="tags twelve columns">
+            <div class="categories twelve columns">
+                <i class="fas fa-sitemap"></i>
+                    <a asp-action="companies" asp-controller="search" asp-route-category="all">All Companies</a>
+                @if (Model.CategoryList != null)
+                {
+                    @foreach (var item in Model.CategoryList)
+                    {
+                        <a asp-action="products" asp-controller="search" asp-route-category="@item.Slug">@item.CategoryName</a>
+                    }
+                }
+                @if (Model.SubCategoryList.Count() > 0)
+                {
+                    <div class="subCategories">
+                        <span>Select a Category</span>
+                        <i class="fas fa-caret-down"></i>
+                        <div class="list">
+                            @foreach (var item in Model.SubCategoryList.OrderBy(x => x.CategoryName))
+                            {
+                                <a asp-action="companies" asp-controller="search" asp-route-category="@item.Slug">@item.CategoryName</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group nativeSubCategories">
+                        <select>
+                            <option data-slug="@Model.Category">Select a Category</option>
+                            @foreach (var item in Model.SubCategoryList.OrderBy(x => x.CategoryName))
+                            {
+                                <option data-slug="@item.Slug">@item.CategoryName</option>
+                            }
+                        </select>
+                    </div>
+                }
+            </div>
+        </div>
+        <hr class="twelve columns" />
+
+    </div>
+</div>
+
+<div class="u-full-width products companies">
+    <div class="container">
+        <div class="tabs">
+            <div class="tab"><a asp-action="products" asp-controller="search" asp-route-key="@Model.SearchKey">Products</a></div>
+            <div class="tab active"><p>Companies</p></div>
+        </div>
+        <div class="tab-content">
+            <div class="content active">
+                <div class="count twelve columns">
+                    <i class="fas fa-filter"></i>
+                    @Model.TotalCount companies for
+                    @if (Model.Category != "all")
+                    {
+                        <a asp-action="companies" asp-controller="search" asp-route-category="all">@Model.Category<div>x</div></a>
+                    }
+
+                    @if (!String.IsNullOrEmpty(Model.SearchKey) && Model.SearchKey.Count() > 0)
+                    {
+                        <a asp-action="companies" asp-controller="search" asp-route-category="all">@Model.SearchKey<div>x</div></a>
+                    }
+                </div>
+                <div class="row">
+                    @foreach (var company in Model.CompanyList)
+                    {
+                        <div class="product">
+                            <a asp-action="about" asp-controller="company" asp-route-slug="@company.Slug">
+                                <div class="img_wrapper">
+                                    <img src="@company.ProfileImagePath" alt="@company.Title" />
+                                </div>
+                                <h4 class="title">@company.Title</h4>
+                            </a>
+                            <div class="description">
+                                <ul>
+                                    <li>
+                                        @foreach (var item in company.CategoryTags)
+                                        {
+                                            <a asp-action="companies" asp-controller="search" asp-route-category="@item">@item</a>
+                                        }
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-map-marker-alt"></i> @company.Location
+                                    </li>
+                                    <li>
+                                        @Html.Raw(company.VerificationTypeId == 0 ? "<i class='far fa-circle'></i>" : "<i class='far fa-check-circle'></i>")
+                                        @company.VerificationType
+                                    </li>
+                                    <li>
+                                        @Html.Raw(company.MembershipTypeId == 0 ? "<i class='far fa-bookmark'></i>" : "<img src='/assets/images/tragate-gold-company-icon.png' data-toggle=tooltip data-placement=top title='Gold Member' />")
+                                        @company.MembershipType
+                                    </li>
+                                </ul>
+                            </div>
+                            <a type="button" class="btn torquoise border" asp-action="about" asp-controller="company" asp-route-slug="@company.Slug">View Company</a>
+                        </div>
+                    }
+
+                    @if (!Model.CompanyList.Any())
+                    {
+                        <div class="noResult">
+                            No Companies
+                        </div>
+                    }
+                    <div class="twelve columns">
+                        <div class="pagination">
+                            <cs-pager cs-paging-pagesize="@Model.PageSize"
+                                      cs-paging-pagenumber="@Model.PageNumber"
+                                      cs-paging-totalitems="@Model.TotalCount"
+                                      cs-pager-li-current-class="current"
+                                      cs-pagenumber-param="page"
+                                      asp-controller="Search"
+                                      asp-action="Companies"
+                                      asp-route-category="@Model.Category"
+                                      asp-route-key="@Model.SearchKey">
+                            </cs-pager>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        window.onload = function(){
+            $('.nativeSubCategories select').change(function () {
+                var slug = $('.nativeSubCategories select option:checked').data('slug');
+                location.href = "/" + slug + "/companies";
+            })
+        }
+    </script>
+}

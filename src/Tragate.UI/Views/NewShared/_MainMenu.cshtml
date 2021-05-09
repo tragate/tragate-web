@@ -1,0 +1,96 @@
+﻿
+<cache expires-after="@TimeSpan.FromHours(1)">
+    @await Component.InvokeAsync("CategoryGroupMenu", new { view = "New" })
+</cache>
+@await Component.InvokeAsync("LoginStatusMobile", new { view = "New" })
+<li class="mobile">
+    <a asp-action="index" asp-controller="home">
+        TraGate Home
+        <i class="fas fa-home"></i>
+    </a>
+</li>
+<li class="mobile">
+    <a asp-action="content" asp-controller="home" asp-route-slug="what-is-tragate">
+        What is TraGate?
+        <i class="fas fa-star"></i>
+    </a>
+</li>
+<li class="mobile">
+    <a href="https://tragate.com/turkiye" target="_blank">
+        TraGate Türkiye
+        <i class="fas fa-star-and-crescent"></i>
+    </a>
+</li>
+
+<cache expires-after="@TimeSpan.FromHours(1)">
+    @await Component.InvokeAsync("SearchNavigation", new { view = "Mobile" })
+</cache>
+<li class="mobile">
+    <a asp-action="contact" asp-controller="home">
+        Contact
+        <i class="far fa-envelope"></i>
+    </a>
+</li>
+<li class="hasSubMenu mobile">
+    <a href="#" onclick="return false;">
+        <i class="fas fa-share"></i>
+        Social Media
+    </a>
+    <ul>
+        <li>
+            <a target="_blank" href="https://www.facebook.com/tragatee">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+        </li>
+        <li>
+            <a target="_blank" href="https://twitter.com/tragatee">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+        </li>
+        <li>
+            <a target="_blank" href="https://www.linkedin.com/company/tragatee">
+                <i class="fab fa-linkedin-in"></i> LinkedIn
+            </a>
+        </li>
+        <li>
+            <a target="_blank" href="https://www.instagram.com/tragatee">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+        </li>
+        <li>
+            <a target="_blank" href="https://www.youtube.com/channel/UCjF8gMQh_CdnBAjUwqRmkqQ">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+        </li>
+    </ul>
+</li>
+<li class="hasSubMenu mobile">
+    <a href="#" onclick="return false;">
+        <i class="fas fa-check"></i>
+        Agreements
+    </a>
+    <ul>
+        <li>
+            <a asp-action="content" asp-controller="home" asp-route-slug="user-terms">
+                <i class="fa fa-chevron-right"></i> User Terms
+            </a>
+        </li>
+        <li>
+            <a asp-action="content" asp-controller="home" asp-route-slug="privacy-policy">
+                <i class="fa fa-chevron-right"></i> Privacy Policy
+            </a>
+        </li>
+        <li>
+            <a asp-action="content" asp-controller="home" asp-route-slug="company-policy">
+                <i class="fa fa-chevron-right"></i> Company Policy
+            </a>
+        </li>
+        <li>
+            <a asp-action="content" asp-controller="home" asp-route-slug="product-listing">
+                <i class="fa fa-chevron-right"></i> Product Listing Policy
+            </a>
+        </li>
+    </ul>
+</li>
+
+

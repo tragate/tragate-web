@@ -1,0 +1,112 @@
+﻿@using Tragate.UI.Infrastructure;
+
+<script type="text/javascript" src="@Config.Root/assets/js/jquery.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/tether.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/bootstrap.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/jquery-migrate.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/hidemaxlistitem.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/jquery-ui.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/hidemaxlistitem.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/jquery.easing.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/scrollup.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/jquery.waypoints.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/waypoints-sticky.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/pace.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/slick.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/jquery.validate.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/toastr.min.js" defer></script>
+<script type="text/javascript" src="@Config.Root/assets/js/scripts.js" defer asp-append-version="true"></script>
+<script src="https://apis.google.com/js/api:client.js" defer></script>
+@*<script type="text/javascript" src="//platform.linkedin.com/in.js">
+        api_key: 77szh91eqma2co
+        authorize: true
+        scope: r_basicprofile r_emailaddress
+    </script>*@
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+@*@if (Config.IsProduction())
+    {
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125331460-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'UA-125331460-1');
+        </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+    }*@
+
+
+<div class="loading" id="loading"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>
+<div class="modal fade" id="TragateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ExternalSignUpModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form class="ajax tragate" method="post" action="/account/external-sign-up" validate>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="black-label"><i class="fa fa-user"></i> Your Full Name</label>
+                        <input class="form-control" type="text" name="fullName" placeholder="Your Full Name" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="black-label"><i class="fa fa-envelope"></i> Email</label>
+                        <input class="form-control" type="email" name="email" value="" readonly>
+                    </div>
+                    @await Component.InvokeAsync("Location", new { })
+                    <div class="form-group">
+                        <div class="mcheckbox">
+                            <input type="checkbox" name="UserTermCheckBox" id="UserTermCheckBox" value="false" checked required>
+                            <label for="UserTermCheckBox"></label>
+                        </div>
+                        <label for="UserTermCheckBox">
+                            I accept TraGate
+                            <span class="ShowTrageteModal" data-url="/content/user-terms/json" data-title="User Terms" style="text-decoration:underline;">
+                                User Terms
+                            </span>
+                            and
+                            <span class="ShowTrageteModal" data-url="/content/privacy-policy/json" data-title="User Terms" style="text-decoration:underline;">
+                                Privacy Policy
+                            </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Login</button>
+                    <div type="button" class="btn btn-secondary" data-dismiss="modal">Close</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

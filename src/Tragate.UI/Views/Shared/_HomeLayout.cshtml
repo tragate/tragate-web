@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M7B7RMB');
+    </script>
+    <!-- End Google Tag Manager -->
+    <title>@ViewData["Title"] - TraGate</title>
+    <meta name="description" content="TraGate is the Trade Gate of Turkey meaning that the B2B trade platform focused on promoting suppliers from Turkey to global market." />
+    <meta name="keywords" content="tragate, trade gate, trade gate of turkey, e-commerce, turkish suppliers, turkish companies, turkish exporter, turkish exporters" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @if (Config.IsProduction() == false)
+    {
+        <meta name="robots" content="noindex, nofollow" />
+    }
+    @Html.Partial("_Styles")
+    @if (IsSectionDefined("Styles"))
+    {
+        RenderSection("Styles", required: false);
+    }
+</head>
+<body class="woocommerce-active page-template-template-homepage-v1 can-uppercase">
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M7B7RMB"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <div id="page" class="hfeed site">
+        @Html.Partial("_TopHeader")
+        @Html.Partial("_Header")
+        <div id="content" class="site-content" tabindex="-1">
+            <div class="row">
+                <div id="primary" class="content-area">
+                    <main id="main" class="site-main">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+        </div>
+        @Html.Partial("_Footer")
+    </div>
+    @Html.Partial("_Scripts")
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

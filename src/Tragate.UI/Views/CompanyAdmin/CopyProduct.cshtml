@@ -1,0 +1,218 @@
+﻿@model Tragate.UI.Models.Product.ProductCopyViewModel
+@{
+    ViewData["Title"] = "EditProduct";
+    Layout = "~/Views/Shared/_CompanyAdminLayout.cshtml";
+}
+@section Styles{
+    <link href="~/assets/css/custom-css/wizard/style.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/assets/js/app-js/add-product.js" asp-append-version="true" defer></script>
+}
+<div class="type-page hentry">
+    <header class="entry-header">
+        <div class="page-header-caption">
+            <h1 class="entry-title" style="text-align:center;">Product Operations</h1>
+        </div>
+    </header>
+    <div class="row" id="">
+        <div class="aligncenter" style="width:100%;">
+            <div class="f1-steps">
+                <div class="f1-progress">
+                    <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3" style="width: 49.99333333333335%;"></div>
+                </div>
+                <div class="f1-step activated">
+                    <div class="f1-step-icon"><i class="fa fa-ellipsis-h"></i></div>
+                    <p>Select Category</p>
+                </div>
+                <div class="f1-step active">
+                    <div class="f1-step-icon"><i class="fa fa-shopping-basket"></i></div>
+                    <p>Product Information</p>
+                </div>
+                <div class="f1-step">
+                    <div class="f1-step-icon"><i class="fa fa-image"></i></div>
+                    <p>Product Images</p>
+                </div>
+            </div>
+            <form class="wpcf7-form ajax tragate" method="post" action="/companyadmin/product-add" style="padding:3% 10%;">
+                <input type="hidden" name="CompanyId" value="@Model.CompanyId" />
+                <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
+                <a id="next" href="/companyadmin/product-image-upload/@Model.CompanyId" style="display:none;"></a>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="black-label" asp-for="CompanyName"></label>
+                        <br>
+                        <span class="wpcf7-form-control-wrap">
+                            <label>@Model.CompanyName</label>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="black-label" asp-for="Category"></label>
+                        <br>
+                        <span class="wpcf7-form-control-wrap">
+                            @{
+                                var last = Model.Category.Last();
+                                foreach (var cat in Model.Category)
+                                {
+                                    <a asp-action="search" asp-controller="search" asp-route-category="@cat.Slug" style="color: #0275d8; font-size: 16px;">@cat.Title</a>
+                                    if (cat != last)
+                                    {
+                                        <span class="delimiter">
+                                            <i class="tm tm-breadcrumbs-arrow-right"></i>
+                                        </span>
+                                    }
+                                }
+                            }
+                        </span>
+                        <br />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="black-label" asp-for="ProductTitle"></label>
+                    <br>
+                    <span class="wpcf7-form-control-wrap">
+                        <input type="text" class="form-control" asp-for="ProductTitle" required />
+                        <span asp-validation-for="ProductTitle" class="text-danger"></span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label class="black-label" asp-for="Brand"></label>
+                    <br>
+                    <span class="wpcf7-form-control-wrap">
+                        <input type="text" class="form-control" asp-for="Brand" />
+                        <span asp-validation-for="Brand" class="text-danger"></span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label class="black-label" asp-for="ModelNumber"></label>
+                    <br>
+                    <span class="wpcf7-form-control-wrap">
+                        <input type="text" class="form-control" asp-for="ModelNumber" />
+                        <span asp-validation-for="ModelNumber" class="text-danger"></span>
+                    </span>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="black-label" asp-for="PriceLow"></label>
+                        <br>
+                        <span class="wpcf7-form-control-wrap">
+                            <input type="text" id="priceLow" class="form-control decimal" asp-for="PriceLow" required />
+                            <span asp-validation-for="PriceLow" class="text-danger"></span>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="black-label" asp-for="PriceHigh"></label>
+                        <br>
+                        <span class="wpcf7-form-control-wrap">
+                            <input type="text" id="priceHigh" class="form-control decimal" asp-for="PriceHigh" required />
+                            <span asp-validation-for="PriceHigh" class="text-danger"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Currency</label>
+                        <select id="CurrencyId" class="ajax" name="CurrencyId" data-url="/common/parameter/CurrencyId" data-current_val="@Model.CurrencyId">
+                            <option value="" selected>Select</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Unit Type</label>
+                        <select id="UnitTypeId" class="ajax" name="UnitTypeId" data-url="/common/parameter/UnitTypeId" data-current_val="@Model.UnitTypeId" data-to_text=".unit">
+                            <option value="" selected>Select</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="black-label" asp-for="MinimumOrder"></label>
+                        <br>
+                        <span class="wpcf7-form-control-wrap">
+                            <input type="text" class="form-control" asp-for="MinimumOrder" />
+                            <span asp-validation-for="MinimumOrder" class="text-danger"></span>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label></label>
+                        <br>
+                        <span class="wpcf7-form-control-wrap">
+                            <label class="unit">Unit Type(s)</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-md-6">
+                        <label class="black-label" asp-for="SupplyAbility"></label>
+                        <br>
+                        <span class="wpcf7-form-control-wrap">
+                            <input type="text" class="form-control" asp-for="SupplyAbility" />
+                            <span asp-validation-for="SupplyAbility" class="text-danger"></span>
+                        </span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label></label>
+                        <br>
+                        <span class="wpcf7-form-control-wrap">
+                            <label class="unit">Unit Type(s)</label><label>/ Month</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="black-label">Place Of Origin</label>
+                        <select id="countries" class="ajax" name="OriginLocationId" data-url="/common/location" data-current_val="@Model.OriginLocationId" data-val_name="name" required>
+                            <option value="" selected>Select</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" id="status" style="display:none;">
+                    <div class="form-group col-md-12">
+                        <label class="black-label" for="StatusId">Status</label>
+                        <select id="StatusId" class="ajax" name="StatusId" data-url="/common/parameter/StatusId" data-current_val="@Model.StatusId">
+                            <option value="" selected>Select</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="black-label" class="black-label" asp-for="Description"></label>
+                        <br>
+                        <span class="wpcf7-form-control-wrap">
+                            <textarea type="text" asp-for="Description" class="form-control summernote"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="black-label" asp-for="ShippingDetail"></label>
+                        <br>
+                        <span class="wpcf7-form-control-wrap">
+                            <textarea type="text" value="textarea" asp-for="ShippingDetail" rows="5" class="form-control"></textarea>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="black-label" asp-for="PackagingDetail"></label>
+                        <br>
+                        <span class="wpcf7-form-control-wrap">
+                            <textarea type="text" value="textarea" asp-for="PackagingDetail" rows="4" class="form-control"></textarea>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <a class="button is-primary full-width text-center" href="/companyadmin/products/@Model.CompanyId">Cancel</a>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <button class="button is-primary full-width" id="btnAdd" type="button">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

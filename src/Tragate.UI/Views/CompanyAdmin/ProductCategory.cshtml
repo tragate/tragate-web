@@ -1,0 +1,84 @@
+@model Tragate.UI.Models.Product.ProductAddViewModel 
+@{ ViewData["Title"] = "Select Category"; Layout = "~/Views/Shared/_CompanyAdminLayout.cshtml"; }
+
+@section Styles{
+    <link href="~/assets/css/custom-css/wizard/style.css" rel="stylesheet" />
+    <style>
+        #setProductCategory {
+            width: 100%;
+            overflow-x: scroll;
+            height: 330px;
+            position: relative;
+            padding-left: 15px;
+        }
+        .list-box {
+            border: 1px solid #04afcb;
+            border-radius: 5px;
+            padding: 5px;
+            overflow-y: scroll;
+            height: 300px;
+            width: 250px;
+            float: left;
+            margin-right: 20px;
+            margin-top: 15px;
+            font-size: 12px;
+        }
+        .list-box ul {
+            list-style: none;
+            margin: 0;
+        }
+        .list-box ul li {
+            cursor: pointer;
+        }
+        .list-box ul li.active {
+            background: #a2a0a0;
+            color: #fff;
+            padding-left: 5px;
+            font-size: 13px;
+        }
+        .finish {
+            text-align: center;
+            padding-top: 75px;
+        }
+    </style>
+}
+@section Scripts{
+    <script src="~/assets/js/app-js/product-category.js" asp-append-version="true" defer></script>
+}
+
+<input type="hidden" id="companyId" value="@Model.CompanyId" />
+<div class="type-page hentry">
+    <header class="entry-header">
+        <div class="page-header-caption">
+            <h1 class="entry-title" style="text-align:center;">Add New Product</h1>
+        </div>
+    </header>
+    <div class="row" id="">
+        <div class="aligncenter" style="width:100%;">
+            <div class="f1-steps">
+                <div class="f1-progress">
+                    <div class="f1-progress-line" data-now-value="16.66" data-number-of-steps="3" style="width: 16.66%;"></div>
+                </div>
+                <div class="f1-step active">
+                    <div class="f1-step-icon"><i class="fa fa-ellipsis-h"></i></div>
+                    <p>Select Category</p>
+                </div>
+                <div class="f1-step">
+                    <div class="f1-step-icon"><i class="fa fa-shopping-basket"></i></div>
+                    <p>Product Information</p>
+                </div>
+                <div class="f1-step">
+                    <div class="f1-step-icon"><i class="fa fa-image"></i></div>
+                    <p>Product Images</p>
+                </div>
+            </div>
+            <input type="hidden" name="CompanyId" value="@Model.CompanyId" />
+
+            <div id="setProductCategory" class="wpcf7-form">
+                <div class="x-scrollable">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

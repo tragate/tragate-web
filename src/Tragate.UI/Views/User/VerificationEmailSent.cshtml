@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "VerificationEmailSent";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<div class="entry-content">
+    <section class="section terms-conditions">
+        <div class="form-group" style="text-align: center">
+            <i class="fa fa-check-circle fa-5x" style="color:green;"></i>
+            <br />
+            <div class="alert alert-success">
+                <strong>
+                    Confirmation email has been sent to verify your e-mail.
+                </strong>
+                <p>
+                    Your are being redirected your profile page.
+                </p>
+            </div>
+            <div style="text-align:center !important; display:inline-block;">
+                <img src="~/assets/images/loading.gif" width="100" />
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                window.location.href = '/user';
+            }, 3000);
+        });
+    </script>
+}
+

@@ -1,0 +1,79 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="wwwroot\Content\NewFolder\**" />
+    <Content Remove="wwwroot\Content\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\Content\NewFolder\**" />
+    <None Remove="wwwroot\Content\NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\Content\js\iziToast.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="2.0.1" />
+    <PackageReference Include="HtmlSanitizer" Version="4.0.199" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Redis" Version="0.3.1" />
+    <PackageReference Include="cloudscribe.Web.Pagination" Version="2.1.*" />
+    <PackageReference Include="cloudscribe.Pagination.Models" Version="1.0.*" />
+    <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="2.0.0" />
+    <PackageReference Include="NEST" Version="6.1.0" />
+    <PackageReference Include="Serilog" Version="2.7.1" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="2.6.1" />
+    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="6.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\images\custom\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\assets\js\app-js\_sil_forgotPassword.js" />
+    <None Include="wwwroot\assets\js\app-js\_sil_resetPassword.js" />
+    <None Include="wwwroot\Content\css\fonts\slick.svg" />
+    <None Include="wwwroot\Content\js\iziToast.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\assets\css\techmarket-font-awesome.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\js\global\google.analytics.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Content\js\iziToast.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\Account\_Sil_ExternalSignUp.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Account\CompleteSignUpInfo.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Account\CompleteSignUp.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\CompanyAdmin\CopyProduct.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\CompanyAdmin\CopyProduct.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\CompanyAdmin\SellerQuotes.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\CompanyAdmin\BuyerQuotes.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\User\SellerQuotes.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\User\BuyerQuotes.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\User\VerificationEmailSent.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+</Project>

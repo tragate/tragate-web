@@ -1,0 +1,32 @@
+@model List<Tragate.UI.Models.Category.CategoryViewModel>
+
+    @foreach(var category in Model) {
+    <section class="section-products-with-image">
+        <header class="section-header">
+            <div class="col-full">
+                <div class="row">
+                    <div class="product-info">
+                        <h2 class="section-title">@category.CategoryName</h2>
+                        <div class="description">@category.Description</div>
+                    </div>
+                    <div class="product-image">
+                        <img alt="" src="@category.ImagePath">
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="woocommerce columns-5">
+            <div class="products col-full">
+                @foreach(var subcategory in category.SubCategoryList) {
+                <div class="product">
+                    <a class="woocommerce-LoopProduct-link woocommerce-loop-product__link" asp-action="products" asp-controller="search" asp-route-category="@subcategory.Slug">
+                        <img width="224" height="197" alt="" class="attachment-shop_catalog size-shop_catalog wp-post-image" src="@subcategory.ImagePath">
+                        <h2 class="woocommerce-loop-product__title">@subcategory.CategoryName</h2>
+                    </a>
+                </div>
+                }
+            </div>
+        </div>
+        <a asp-action="products" asp-controller="search" asp-route-category="@category.Slug" class="load-more-button">Show All @category.CategoryName Products</a>
+    </section>
+    }

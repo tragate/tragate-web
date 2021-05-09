@@ -1,0 +1,107 @@
+@model Tragate.UI.Models.Company.CompanyProfileViewModel
+@{ ViewData["Title"] = "Edit Company"; Layout = "~/Views/Shared/_CompanyAdminLayout.cshtml"; }
+<div class="type-page hentry">
+    <header class="entry-header">
+        <div class="page-header-caption">
+            <h1 class="entry-title">Edit Company Profile</h1>
+        </div>
+    </header>
+    <div class="entry-content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-form">
+                    <div role="form" class="wpcf7" id="wpcf7-f425-o1" lang="en-US" dir="ltr">
+                        <div class="screen-reader-response"></div>
+                        <form action="/companyadmin/Edit/605" method="post" id="CompanyEdit">
+                            <input type="hidden" asp-for="CompanyId" />
+                            <input type="hidden" asp-for="ProfileImagePath" />
+                            <input type="hidden" asp-for="VerificationTypeId" />
+                            <input type="hidden" asp-for="WebsitePoint" />
+                            <input type="hidden" asp-for="WebsiteProductCount" />
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input asp-for="Name" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea asp-for="Description" class="form-control summernote" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="CategoryIdList">Categories</label>
+                                <input type="hidden" value="@Model.CategoryIdString" name="CategoryIdString" id="CategoryIdString" required>
+                                <select id="CategoryIdList" class="ajax multiple" name="CategoryIdList" data-url="/category/get-categories" data-current_val="@Model.CategoryIdString" data-val_to="#CategoryIdString">
+                                    <option value="" selected>Select</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Business Type</label>
+                                <input type="hidden" value="@Model.BusinessType" name="BusinessType" id="BusinessType" required>
+                                <select id="BusinessTypeList" class="ajax multiple" name="BusinessTypeList" data-url="/common/parameter/BusinessTypeId" data-current_val="@Model.BusinessType" data-val_to="#BusinessType">
+                                    <option value="" selected>Select</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Establishment Year</label>
+                                <input asp-for="EstablishmentYear" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Tax Office</label>
+                                <input asp-for="TaxOffice" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Tax Number</label>
+                                <input asp-for="TaxNumber" class="form-control" required />
+                            </div>
+                            @await Component.InvokeAsync("Location", new { @Model.CountryId, @Model.StateId })
+
+                            <div class="form-group">
+                                <label>Annual Revenue</label>
+                                <select id="AnnualRevenueId" class="ajax" name="AnnualRevenueId" data-url="/common/parameter/AnnualRevenueId" data-current_val="@Model.AnnualRevenueId" required>
+                                    <option value="" selected>Select</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Employee Count</label>
+                                <select id="EmployeeCountId" class="ajax" name="EmployeeCountId" data-url="/common/parameter/EmployeeCountId" data-current_val="@Model.EmployeeCountId" required>
+                                    <option value="" selected>Select</option>
+                                </select>
+                            </div>
+
+                            @*<div class="form-group">
+                                <label>Company Status</label>
+                                <select id="StatusId" class="ajax" name="StatusId" data-url="/common/parameter/StatusId" data-current_val="@Model.StatusId" required>
+                                    <option value="" selected>Select</option>
+                                </select>
+                            </div>*@
+                            <input type="hidden" name="StatusId" id="StatusId" value="@Model.StatusId" />
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input asp-for="Address" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Website</label>
+                                <input asp-for="Website" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input asp-for="Email" class="form-control" required />
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input asp-for="Phone" class="form-control" required />
+                            </div>
+                            <div class="form-group clearfix">
+                                <p>
+                                    <button id="CompanySave" class="button">Save</button>
+                                </p>
+                            </div>
+                            <div class="wpcf7-response-output wpcf7-display-none"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 store-info store-info-v2"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@model List<Tragate.UI.Models.Category.CategoryViewModel>
+
+<div id="secondary" class="widget-area shop-sidebar" role="complementary">
+    <div class="widget woocommerce widget_product_categories techmarket_widget_product_categories" id="techmarket_product_categories_widget-2">
+        <ul class="product-categories ">
+            <li class="product_cat">
+                <span>Browse Categories</span>
+                <ul>
+                    <li class="cat-item">
+                            <a asp-controller="search" asp-action="@ViewData["SearchType"]" asp-route-category="all">
+                                <span class="no-child"></span>All Categories
+                            </a>
+                        </li>
+                    @foreach (var category in Model){
+                        <li class="cat-item">
+                            <a asp-controller="search" asp-action="@ViewData["SearchType"]" asp-route-category="@category.Slug">
+                                <span class="no-child"></span>@category.CategoryName
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
